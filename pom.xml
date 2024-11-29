@@ -19,5 +19,39 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
+            <!-- Apache POI for Excel (HSSF for .xls) -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.3</version> <!-- Check for the latest version -->
+        </dependency>
+
+        <!-- Apache POI for Excel (XSSF for .xlsx) -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.3</version> <!-- Check for the latest version -->
+        </dependency>
+
+        <!-- XMLBeans for handling XML data -->
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>5.1.1</version> <!-- Check for the latest version -->
+        </dependency>
+
+        <!-- Commons Collections for additional collection utilities -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version> <!-- Check for the latest version -->
+        </dependency>
+
+        <!-- Commons Compress for handling compressed files -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.21</version> <!-- Check for the latest version -->
+        </dependency>
     </dependencies>
 </project>

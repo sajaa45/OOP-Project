@@ -1,6 +1,13 @@
 package org.example.Service;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -25,7 +32,7 @@ public class DataIngestionService{
         }
     }
 
-    public static void loadDataFromDatabase(String dbUrl, String dbUsername, String dbPassword, String query, List<List<String>> dbData) {
+    public static void loadDataFromDatabase(String dbUrl, String dbUsername, String dbPassword, String query, List<List<String>> data) {
         try (Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -35,11 +42,41 @@ public class DataIngestionService{
                 for (int i = 1; i <= columnCount; i++) {
                     row.add(rs.getString(i));
                 }
-                dbData.add(row);
+                data.add(row);
             }
         } catch (SQLException e) {
             System.out.println("Failed to load data from the database.");
             e.printStackTrace();
         }
     }
-}
+
+    public void loadDataFromExcel(String filePath, List<List<String>> data) {
+
+        try (FileInputStream fis = new FileInputStream(filePath);
+
+             Workbook workbook = filePath.endsWith(".xls") ? new HSSFWorkbook(fis) : new XSSFWorkbook(fis)) {
+
+
+            Sheet sheet = workbook.getSheetAt(0); // Read the first sheet
+
+            for (Row row : sheet) {
+
+                List<String> rowData = new ArrayList<>();
+
+                for (Cell cell : row) {
+
+                    rowData.add(cell.toString()); // Add cell data to rowData
+
+                }
+
+                data.add(rowData); // Add rowData to the main data list
+
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+}}
