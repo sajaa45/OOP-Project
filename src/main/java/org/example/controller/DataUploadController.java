@@ -18,9 +18,32 @@ public class DataUploadController {
     private DataIngestionService dataIngestionService;
     private List<List<String>> data = new ArrayList<>();
     public DataUploadController() {
-        this.dataIngestionService = new DataIngestionService();
+        this.data = new ArrayList<>();
         initializeUI();
-        loadDataFromDatabase(); // Call to load data from the database
+    }
+    // Process the selected file and return the data
+    private void processFile(File file) {
+        try {
+            if (file.getName().endsWith(".csv")) {
+                data = DataIngestionService.loadDataFromCSV(file.getAbsolutePath());
+            } else if (file.getName().endsWith(".xls") || file.getName().endsWith(".xlsx")) {
+                data = DataIngestionService.loadDataFromExcel(file.getAbsolutePath());
+            } else {
+                throw new IllegalArgumentException("Unsupported file format");
+            }
+
+            displayData(); // Show data in the text area
+        } catch (Exception e) {
+            e.printStackTrace();
+            textArea.setText("Error processing file: " + e.getMessage());
+        }
+    }
+    private void displayData() {
+        textArea.setText(""); // Clear previous content
+        for (List<String> row : data) {
+            String rowData = String.join("\t", row);
+            textArea.append(rowData + "\n");
+        }
     }
     private void initializeUI() {
         frame = new JFrame("File Chooser Example");
@@ -39,64 +62,67 @@ public class DataUploadController {
         });
 
 
-        // Frame settings
+
         frame.setSize(600, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 
     private void showFileChooser() {
-        // Create a file chooser
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Choose a CSV or Excel file");
-        // Set the file filter for CSV and Excel files
-        fileChooser.setFileFilter(new FileNameExtensionFilter("CSV and Excel Files", "csv", "xls", "xlsx"));
-        // Show the open dialog
-        int userSelection = fileChooser.showOpenDialog(frame);
-        // Handle the user's selection
-        if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File fileToOpen = fileChooser.getSelectedFile();
-            System.out.println("Selected file: " + fileToOpen.getAbsolutePath());
-            displayFileContent(fileToOpen);
-        } else {
-            System.out.println("Open command cancelled by user.");
-        }
+        int returnValue = fileChooser.showOpenDialog(frame);
 
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            processFile(file);
+        }
     }
 
 
     private void loadDataFromDatabase() {
-        String dbUrl = "jdbc:mysql://localhost:3306/car"; // Replace with your DB URL
-        String dbUsername = "root"; // Replace with your DB username
-        String dbPassword = "root"; // Replace with your DB password
-        String query = "SELECT * FROM bmw"; // SQL Query
+        String dbUrl = "jdbc:mysql://localhost:3306/car";
+        String dbUsername = "root";
+        String dbPassword = "root";
+        String query = "SELECT * FROM bmw";
         DataIngestionService.loadDataFromDatabase(dbUrl, dbUsername, dbPassword, query, data);
         for(List<String> row:data) {
-            System.out.println(row); // Join each row's contents with tabs
+            System.out.println(row);
         }
     }
 
 
     private void displayFileContent(File file) {
-        textArea.setText(""); // Clear previous content
+        textArea.setText("");
         try {
+            List<List<String>> data;
             if (file.getName().endsWith(".csv")) {
-                // Read CSV file
                 String csvFilePath = file.getAbsolutePath();
-                dataIngestionService.loadDataFromCSV(csvFilePath, data); // Call the instance method
+                data = DataIngestionService.loadDataFromCSV(csvFilePath);
             } else if (file.getName().endsWith(".xls") || file.getName().endsWith(".xlsx")) {
-                // Read Excel file and store data in the list
-                dataIngestionService.loadDataFromExcel(file.getAbsolutePath(), data); // Call the instance method
+                String excelFilePath = file.getAbsolutePath();
+                data = DataIngestionService.loadDataFromExcel(excelFilePath);
+            } else {
+                throw new IllegalArgumentException("Unsupported file type: " + file.getName());
             }
-            for(List<String> row:data) {
-                System.out.println(row); // Join each row's contents with tabs
+
+            for (List<String> row : data) {
+                String rowData = String.join("\t", row);
+                System.out.println(rowData);
+                textArea.append(rowData + "\n");
             }
         } catch (Exception e) {
             e.printStackTrace();
             textArea.setText("Error reading file: " + e.getMessage());
         }
-}
-
+    }
+    public void loadDataFromDatabase(String dbUrl, String dbUsername, String dbPassword, String query) {
+        data = new ArrayList<>();
+        DataIngestionService.loadDataFromDatabase(dbUrl, dbUsername, dbPassword, query, data);
+        displayData();
+    }
+    public List<List<String>> getData() {
+        return data;
+    }
 
 }
 
