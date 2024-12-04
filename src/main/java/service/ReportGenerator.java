@@ -1,4 +1,4 @@
-package org.example.Service;
+package service;
 
 public class ReportGenerator {
 }

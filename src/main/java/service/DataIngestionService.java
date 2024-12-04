@@ -1,4 +1,5 @@
-package org.example.Service;
+package service;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -15,21 +16,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataIngestionService{
-    public static void loadDataFromCSV(String filePath, List<List<String>> csvData ){
+    public static List<List<String>> loadDataFromCSV(String filePath) {
+        List<List<String>> csvData = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // Split by comma and store each cell in a list
                 String[] values = line.split(",");
                 List<String> row = new ArrayList<>();
                 for (String value : values) {
-                    row.add(value.trim()); // Trim to clean up whitespace
+                    row.add(value.trim());
                 }
                 csvData.add(row);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return csvData;
     }
 
     public static void loadDataFromDatabase(String dbUrl, String dbUsername, String dbPassword, String query, List<List<String>> data) {
@@ -50,33 +52,22 @@ public class DataIngestionService{
         }
     }
 
-    public void loadDataFromExcel(String filePath, List<List<String>> data) {
-
+    public static List<List<String>> loadDataFromExcel(String filePath) {
+        List<List<String>> data = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(filePath);
-
              Workbook workbook = filePath.endsWith(".xls") ? new HSSFWorkbook(fis) : new XSSFWorkbook(fis)) {
 
-
-            Sheet sheet = workbook.getSheetAt(0); // Read the first sheet
-
+            Sheet sheet = workbook.getSheetAt(0);
             for (Row row : sheet) {
-
                 List<String> rowData = new ArrayList<>();
-
                 for (Cell cell : row) {
-
-                    rowData.add(cell.toString()); // Add cell data to rowData
-
+                    rowData.add(cell.toString());
                 }
-
-                data.add(rowData); // Add rowData to the main data list
-
+                data.add(rowData);
             }
-
         } catch (IOException e) {
-
             e.printStackTrace();
-
         }
-
-}}
+        return data;
+    }
+}
