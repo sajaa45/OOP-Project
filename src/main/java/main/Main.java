@@ -1,6 +1,5 @@
 package main;
 
-import model.Car;
 import controller.DataUploadController;
 import repository.CarRepository;
 import utils.DataCleaningUtils;

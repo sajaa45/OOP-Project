@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataIngestionService{
+
     public static List<List<String>> loadDataFromCSV(String filePath) {
         List<List<String>> csvData = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {

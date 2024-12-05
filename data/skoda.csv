@@ -1,4 +1,5 @@
 model,year,price,transmission,mileage,fuelType,tax,mpg,engineSize
+
  Octavia,2017,10550,Manual,25250,Petrol,150,54.3,1.4
  Citigo,2018,8200,Manual,1264,Petrol,145,67.3,1.0
  Octavia,2019,15650,Automatic,6825,Diesel,145,67.3,2.0

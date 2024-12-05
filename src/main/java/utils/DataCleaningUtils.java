@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class DataCleaningUtils {
     public static Object[][] cleanData(Object[][] data, String placeholder) {
+
         Object[][] cleanedData = new Object[data.length][];
         for (int i = 0; i < data.length; i++) {
             cleanedData[i] = cleanRow(data[i], placeholder);

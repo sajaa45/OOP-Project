@@ -1,4 +1,5 @@
 model,year,price,transmission,mileage,fuelType,tax,mpg,engineSize
+
  Fiesta,2017,12000,Automatic,15944,Petrol,150,57.7,1.0
  Focus,2018,14000,Manual,9083,Petrol,150,57.7,1.0
  Focus,2017,13000,Manual,12456,Petrol,150,57.7,1.0

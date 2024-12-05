@@ -6,7 +6,6 @@ import java.util.List;
 import model.Car;
 
 public class CarRepository {
-
     private List<Car> cars = new ArrayList<>();
     private Object[][] data;
 

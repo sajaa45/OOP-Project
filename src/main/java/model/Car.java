@@ -10,7 +10,6 @@ public class Car {
     private double roadTax;
     private double mpg;
     private double engineSize;
-
     // constructor1
     public Car() {
         this.model = "";
@@ -23,7 +22,6 @@ public class Car {
         this.mpg = 0.0;
         this.engineSize = 0.0;
     }
-
     // Constructor2
     public Car(String model, int year, double price, int mileage,
                String fuelType, String transmission, double roadTax, double mpg, double engineSize) {

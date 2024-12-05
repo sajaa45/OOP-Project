@@ -9,9 +9,7 @@ public class dbConnect {
     static final String URL = "jdbc:mysql://localhost:3306/car";
     static final String USER = "root";
     static final String PASSWORD = "123456ja";
-
     private Connection connection;
-
     static dbConnect instance;
 
     private dbConnect() {
@@ -21,11 +19,9 @@ public class dbConnect {
             ex.printStackTrace();
         }
     }
-
     public Connection getConnection() {
         return connection;
     }
-
     public static dbConnect getInstance() {
         if (instance == null)
             instance = new dbConnect();

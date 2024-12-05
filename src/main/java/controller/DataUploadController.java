@@ -11,7 +11,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class DataUploadController {
     private JFrame frame;
     private JTextArea textArea;
