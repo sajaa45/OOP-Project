@@ -20,10 +20,7 @@ public class DataCleaningUtils {
     }
 
     private static List<Object> cleanRow(List<Object> row) {
-        return row.stream()
-                .filter(DataCleaningUtils::isValid)
-                .map(value -> value != null ? value.toString().trim() : "")
-                .collect(Collectors.toList());
+        return row.stream().filter(DataCleaningUtils::isValid).map(value -> value != null ? value.toString().trim() : "").collect(Collectors.toList());
     }
 
     private static boolean isValid(Object value) {
@@ -35,8 +32,6 @@ public class DataCleaningUtils {
     }
 
     private static List<Object> fillMissing(Object[] row, String placeholder) {
-        return Arrays.stream(row)
-                .map(value -> (value == null || value.toString().trim().isEmpty()) ? placeholder : value)
-                .collect(Collectors.toList());
+        return Arrays.stream(row).map(value -> (value == null || value.toString().trim().isEmpty()) ? placeholder : value).collect(Collectors.toList());
     }
 }

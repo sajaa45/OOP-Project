@@ -51,9 +51,9 @@ public class CarRepository {
             data[i][0] = car.getModel();
             data[i][1] = car.getYear();
             data[i][2] = car.getPrice();
+            data[i][5] = car.getTransmission();
             data[i][3] = car.getMileage();
             data[i][4] = car.getFuelType();
-            data[i][5] = car.getTransmission();
             data[i][6] = car.getRoadTax();
             data[i][7] = car.getMpg();
             data[i][8] = car.getEngineSize();
@@ -64,5 +64,8 @@ public class CarRepository {
     }
     public List<Car> getCars() {
         return cars;
+    }
+    public String[] getHeaders() {
+        return new String[] {"Model", "Year", "Price", "Transmission", "Mileage", "Fuel Type", "Road Tax", "MPG", "Engine Size"};
     }
 }
