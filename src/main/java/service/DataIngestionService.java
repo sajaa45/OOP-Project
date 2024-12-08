@@ -28,6 +28,7 @@ public class DataIngestionService{
                 }
                 csvData.add(row);
             }
+            System.out.println("CSV data has been loaded successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,6 +47,7 @@ public class DataIngestionService{
                 }
                 data.add(row);
             }
+            System.out.println("Data has been successfully loaded from the database.");
         } catch (SQLException e) {
             System.out.println("Failed to load data from the database.");
             e.printStackTrace();
@@ -65,6 +67,7 @@ public class DataIngestionService{
                 }
                 data.add(rowData);
             }
+            System.out.println("Excel data has been successfully loaded.");
         } catch (IOException e) {
             e.printStackTrace();
         }

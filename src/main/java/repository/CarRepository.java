@@ -32,8 +32,9 @@ public class CarRepository {
                 double roadTax = Double.parseDouble(row.get(6));
                 double mpg = Double.parseDouble(row.get(7));
                 double engineSize = Double.parseDouble(row.get(8));
+                String car_type = row.get(9);
 
-                Car car = new Car(model, year, price, mileage, fuelType, transmission, roadTax, mpg, engineSize);
+                Car car = new Car(model, year, price, mileage, fuelType, transmission, roadTax, mpg, engineSize, car_type);
                 cars.add(car);
             } catch (Exception e) {
                 System.err.println("Error processing row: " + row);
@@ -57,6 +58,7 @@ public class CarRepository {
             data[i][6] = car.getRoadTax();
             data[i][7] = car.getMpg();
             data[i][8] = car.getEngineSize();
+            data[i][9] = car.getCar_type();
         }
     }
     public Object[][] getData() {

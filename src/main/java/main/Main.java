@@ -1,17 +1,42 @@
 package main;
-
-import model.Car;
-import controller.DataUploadController;
-import repository.CarRepository;
-import utils.DataCleaningUtils;
-
+import utils.CSVMerger;
+import utils.CSVDataInserter;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.Arrays;
+import service.DataAnalysisController;
+import model.Car;
+
 
 public class Main {
-    public static void main(String[] args) {
-        DataUploadController controller = new DataUploadController();
+        public static void main(String[] args) {
+                // Define file names and output file name
+                String[] fileNames = {"data/audi.csv", "data/bmw.csv", "data/ford.csv", "data/hyundi.csv", "data/merc.csv", "data/skoda.csv", "data/toyota.csv"};
+                String outputFileName = "data/merged_data.csv";
+
+                // Merge CSV files into a single file
+                CSVMerger csvMerger = new CSVMerger();
+                csvMerger.mergeCSVFiles(fileNames, outputFileName);
+
+                // Insert data into the database from the merged CSV file
+                CSVDataInserter csvDataInserter = new CSVDataInserter();
+                csvDataInserter.insertDataToDatabase(outputFileName);
+
+                //Analyzing categorical and numerical features
+                List<Car> cars = List.of(
+                        new Car("Model S", 2020, 79999, 15000, "Electric", "Automatic", 0, 120, 2.0, "audi"),
+                        new Car("Civic", 2019, 25000, 30000, "Petrol", "Manual", 150, 35, 1.6, "ford"),
+                        new Car("Focus", 2018, 20000, 25000, "Diesel", "Manual", 200, 40, 1.8, "audi"),
+                        new Car("Camry", 2021, 30000, 10000, "Hybrid", "Automatic", 100, 50, 2.5, "ford")
+                );
+
+                DataAnalysisController dataAnalysisController = new DataAnalysisController();
+
+                System.out.println("Analyzing categorical feature: fuelType");
+                dataAnalysisController.analyzeAndVisualizeCategoricalFeature(cars, "fuelType");
+
+                System.out.println("Analyzing numerical feature: price");
+                dataAnalysisController.analyzeAndVisualizeNumericalFeature(cars, "price");
+
+        /*DataUploadController controller = new DataUploadController();
 
         while (true) {
             List<List<String>> data = controller.getData();
@@ -58,5 +83,5 @@ public class Main {
     }
     private static List<List<String>> convert2DArrayToList(Object[][] array) {
         return Arrays.stream(array).map(row -> Arrays.stream(row).map(Object::toString).collect(Collectors.toList())).collect(Collectors.toList());
-    }
-}
+    }*/
+        }}

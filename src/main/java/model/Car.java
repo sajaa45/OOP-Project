@@ -10,6 +10,7 @@ public class Car {
     private double roadTax;
     private double mpg;
     private double engineSize;
+    private String car_type;
 
     // constructor1
     public Car() {
@@ -22,11 +23,12 @@ public class Car {
         this.roadTax = 0.0;
         this.mpg = 0.0;
         this.engineSize = 0.0;
+        this.car_type = "";
     }
 
     // Constructor2
     public Car(String model, int year, double price, int mileage,
-               String fuelType, String transmission, double roadTax, double mpg, double engineSize) {
+               String fuelType, String transmission, double roadTax, double mpg, double engineSize, String car_type) {
         this.model = model;
         this.year = year;
         this.price = price;
@@ -36,6 +38,7 @@ public class Car {
         this.roadTax = roadTax;
         this.mpg = mpg;
         this.engineSize = engineSize;
+        this.car_type = car_type;
     }
 
     // getters and setters
@@ -66,9 +69,13 @@ public class Car {
     public double getEngineSize() { return engineSize; }
     public void setEngineSize(double engineSize) { this.engineSize = engineSize; }
 
+    public String getCar_type() { return car_type; }
+    public void setCar_type(String car_type) { this.car_type = car_type; }
+
+
     @Override
     public String toString() {
-        return String.format("Car[Model=%s, Year=%d, Price=%.2f, Transmission=%s, Mileage=%d, FuelType=%s, RoadTax=%.2f, MPG=%.2f, EngineSize=%.2f]",
-                model, year, price, transmission, mileage, fuelType, roadTax, mpg, engineSize);
+        return String.format("Car[Model=%s, Year=%d, Price=%.2f, Transmission=%s, Mileage=%d, FuelType=%s, RoadTax=%.2f, MPG=%.2f, EngineSize=%.2f, Car_Type=%s]",
+                model, year, price, transmission, mileage, fuelType, roadTax, mpg, engineSize, car_type);
     }
 }
