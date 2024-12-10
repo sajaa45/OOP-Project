@@ -1,6 +1,7 @@
 package repository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import model.Car;
@@ -32,7 +33,7 @@ public class CarRepository {
                 double mpg = Double.parseDouble(row.get(7));
                 double engineSize = Double.parseDouble(row.get(8));
 
-                Car car = new Car(model, year, price, mileage, fuelType, transmission, roadTax, mpg, engineSize);
+                Car car = new Car(model, year, price, transmission, mileage, fuelType, roadTax, mpg, engineSize);
                 cars.add(car);
             } catch (Exception e) {
                 System.err.println("Error processing row: " + row);
@@ -41,7 +42,8 @@ public class CarRepository {
         }
         populate2DArray();
     }
-    private void populate2DArray() {
+
+    public void populate2DArray() {
         int rows = cars.size();
         int cols = 9;
         data = new Object[rows][cols];
@@ -50,14 +52,15 @@ public class CarRepository {
             data[i][0] = car.getModel();
             data[i][1] = car.getYear();
             data[i][2] = car.getPrice();
-            data[i][5] = car.getTransmission();
-            data[i][3] = car.getMileage();
-            data[i][4] = car.getFuelType();
+            data[i][3] = car.getTransmission();
+            data[i][4] = car.getMileage();
+            data[i][5] = car.getFuelType();
             data[i][6] = car.getRoadTax();
             data[i][7] = car.getMpg();
             data[i][8] = car.getEngineSize();
         }
     }
+
     public Object[][] getData() {
         return data;
     }

@@ -23,14 +23,14 @@ public class Car {
         this.engineSize = 0.0;
     }
     // Constructor2
-    public Car(String model, int year, double price, int mileage,
-               String fuelType, String transmission, double roadTax, double mpg, double engineSize) {
+    public Car(String model, int year, double price, String transmission, int mileage,
+               String fuelType,  double roadTax, double mpg, double engineSize) {
         this.model = model;
         this.year = year;
         this.price = price;
+        this.transmission = transmission;
         this.mileage = mileage;
         this.fuelType = fuelType;
-        this.transmission = transmission;
         this.roadTax = roadTax;
         this.mpg = mpg;
         this.engineSize = engineSize;
