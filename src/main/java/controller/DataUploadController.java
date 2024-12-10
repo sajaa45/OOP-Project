@@ -38,6 +38,7 @@ public class DataUploadController {
             textArea.setText("Error processing file: " + e.getMessage());
         }
     }
+
     private void displayData() {
         textArea.setText(""); // Clear previous content
         for (List<String> row : data) {
@@ -45,6 +46,7 @@ public class DataUploadController {
             textArea.append(rowData + "\n");
         }
     }
+
     private void initializeUI() {
         frame = new JFrame("File Chooser Example");
         JButton button = new JButton("Select CSV or Excel File");
@@ -60,8 +62,6 @@ public class DataUploadController {
                 showFileChooser();
             }
         });
-
-
 
         frame.setSize(600, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

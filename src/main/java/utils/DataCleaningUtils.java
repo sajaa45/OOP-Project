@@ -12,6 +12,7 @@ public class DataCleaningUtils {
         }
         return cleanedData;
     }
+
     private static Object[] cleanRow(Object[] row, String placeholder) {
         List<Object> rowList = new ArrayList<>(Arrays.asList(row));
         for (int i = 0; i < row.length; i++) {

@@ -11,13 +11,15 @@ public class DataAnalysisService {
 
     public DataAnalysisService(List<Car> carList) {
     }
+
     List<JFreeChart> allCharts = new ArrayList<>();
+
     public DataAnalysisService() {
     }
+
     private void appendOutput(String text) {
         System.out.println(text);
     }
-
 
     public void analyzeNumericalData(Object[][] data, int[] numericalIndices, Map<Integer, String> columnNames) {
         for (int index : numericalIndices) {

@@ -12,14 +12,14 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class Main {
+
     public static void main(String[] args) {
         DataUploadController controller = new DataUploadController();
         DataAnalysisService analysis = new DataAnalysisService();
         DataVisualizationService visualizer = new DataVisualizationService(analysis);
         CarRepository carRepository = new CarRepository();
+
         List<List<String>> data;
-
-
         List<String> attributes = Arrays.asList("price", "mileage", "year", "engineSize", "mpg");
         Object[][] table = null;
         Map<Integer, String> nColumnNames = Map.of(

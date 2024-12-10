@@ -19,9 +19,11 @@ public class dbConnect {
             ex.printStackTrace();
         }
     }
+
     public Connection getConnection() {
         return connection;
     }
+
     public static dbConnect getInstance() {
         if (instance == null)
             instance = new dbConnect();

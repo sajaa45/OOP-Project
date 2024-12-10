@@ -35,7 +35,6 @@ public class Car {
         this.mpg = mpg;
         this.engineSize = engineSize;
     }
-
     // getters and setters
     public String getModel() { return model; }
     public void setModel(String model) { this.model = model; }
