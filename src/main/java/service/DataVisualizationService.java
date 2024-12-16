@@ -92,6 +92,42 @@ public class DataVisualizationService {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ensure the application exits on close
         frame.setVisible(true);
     }
+//    creating scatter plot with regression
+    public void createScatterPlotWithRegression(List<Car> cars, String xAttribute, String yAttribute) {
+        XYSeries scatterSeries = new XYSeries("Data Points");
+
+        for (Car car : cars) {
+            double xValue = analysis.getAttributeValue(car, xAttribute);
+            double yValue = analysis.getAttributeValue(car, yAttribute);
+            scatterSeries.add(xValue, yValue);
+        }
+
+        XYSeriesCollection dataset = new XYSeriesCollection(scatterSeries);
+
+        double minX = scatterSeries.getMinX();
+        double maxX = scatterSeries.getMaxX();
+        XYSeries regressionSeries = new XYSeries("Regression Line");
+        regressionSeries.add(minX, analysis.predict(minX));
+        regressionSeries.add(maxX, analysis.predict(maxX));
+        dataset.addSeries(regressionSeries);
+
+        JFreeChart scatterPlot = ChartFactory.createScatterPlot(
+                yAttribute + " vs " + xAttribute,
+                xAttribute,
+                yAttribute,
+                dataset,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+        );
+
+        JFrame frame = new JFrame("Scatter Plot with Regression");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(new ChartPanel(scatterPlot));
+        frame.pack();
+        frame.setVisible(true);
+    }
 
     // Method to create a single scatter plot
     private JFreeChart createScatterPlot(List<Car> cars, String xAttribute, String yAttribute) {
