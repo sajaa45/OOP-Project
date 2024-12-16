@@ -21,6 +21,7 @@ import java.util.List;
 
 public class DataVisualizationService {
     private DataAnalysisService analysis;
+
     public static JFreeChart plotHistogram(double[] data, String title, String xLabel, String yLabel) {
         HistogramDataset dataset = new HistogramDataset();
         dataset.addSeries("Frequency", data, 10);

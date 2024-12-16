@@ -24,16 +24,14 @@ public class DataAnalysisService {
     public void analyzeNumericalData(Object[][] data, int[] numericalIndices, Map<Integer, String> columnNames) {
         for (int index : numericalIndices) {
             double[] columnData = extractDoubleColumn(data, index);
+            String columnName = columnNames.getOrDefault(index, "Unknown Column");
             if (columnData.length == 0) {
-                appendOutput("Skipping analysis for column: " + columnNames.getOrDefault(index, "Unknown Column") + " due to lack of valid data.");
+                appendOutput("No numerical data found for column: " + columnName);
                 continue;
             }
-            String columnName = columnNames.getOrDefault(index, "Unknown Column");
             appendOutput("\nAnalysis for Column: " + columnName);
-
             Map<String, Double> centralTendency = calculateCentralTendency(columnData);
             appendOutput("Measures of Central Tendency: " + centralTendency);
-
             Map<String, Double> variability = calculateVariability(columnData);
             appendOutput("Measures of Variability: " + variability);
             JFreeChart histogram = DataVisualizationService.plotHistogram(columnData, "Histogram for " + columnName, "Value", "Frequency");
@@ -43,20 +41,16 @@ public class DataAnalysisService {
 
     public void analyzeCategoricalData(Object[][] data, int[] categoricalIndices, Map<Integer, String> columnNames) {
         for (int index : categoricalIndices) {
-            String[] columnData = extractStringColumn(data, index);
-            String columnName = columnNames.getOrDefault(index, "Column " + index);
-            appendOutput("\nAnalysis for " + columnName + ":");
-
+            String[] columnData = extractCategoricalColumn(data, index);
+            String columnName = columnNames.getOrDefault(index, "Unknown Column");
+            appendOutput("\nAnalysis for Column: " + columnName);
             if (columnData.length == 0) {
-                appendOutput("No data found for column " + columnName);
+                appendOutput("No data available for column: " + columnName);
                 continue;
             }
-
             Map<String, Integer> frequency = calculateFrequency(columnData);
             appendOutput("Frequency Distribution: " + frequency);
-            appendOutput("Unique Categories: " + frequency.keySet());
             appendOutput("Proportions: " + calculateProportions(frequency, columnData.length));
-
             JFreeChart pieChart = DataVisualizationService.plotPieChart(frequency, "Pie Chart for " + columnName);
             allCharts.add(pieChart);
         }
@@ -73,8 +67,21 @@ public class DataAnalysisService {
         }).filter(Double::isFinite).toArray();
     }
 
-    private String[] extractStringColumn(Object[][] data, int columnIndex) {
-        return Arrays.stream(data).filter(row -> row != null && row.length > columnIndex && row[columnIndex] != null).map(row -> row[columnIndex].toString()).toArray(String[]::new);
+    private String[] extractCategoricalColumn(Object[][] data, int columnIndex) {
+        return Arrays.stream(data)
+                .filter(row -> row != null && row.length > columnIndex && row[columnIndex] != null)
+                .map(row -> row[columnIndex].toString().trim())
+                .filter(value -> !isNumeric(value)) // Exclude numeric values
+                .toArray(String[]::new);
+    }
+
+    private boolean isNumeric(String value) {
+        try {
+            Double.parseDouble(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private Map<String, Double> calculateCentralTendency(double[] data) {
