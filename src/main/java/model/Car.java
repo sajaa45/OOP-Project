@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class Car {
 
     private String model;
@@ -69,4 +71,5 @@ public class Car {
         return String.format("Car[Model=%s, Year=%d, Price=%.2f, Transmission=%s, Mileage=%d, FuelType=%s, RoadTax=%.2f, MPG=%.2f, EngineSize=%.2f]",
                 model, year, price, transmission, mileage, fuelType, roadTax, mpg, engineSize);
     }
+
 }

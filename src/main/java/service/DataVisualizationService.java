@@ -88,6 +88,50 @@ public class DataVisualizationService {
         frame.setVisible(true);
     }
 
+    public void createScatterPlotWithRegression(List<Car> cars, String xAttribute, String yAttribute) {
+        XYSeries scatterSeries = new XYSeries("Data Points");
+        double minX = Double.MAX_VALUE, maxX = Double.MIN_VALUE;
+
+        for (Car car : cars) {
+            double x = analysis.getAttributeValue(car, xAttribute);
+            double y = analysis.getAttributeValue(car, yAttribute);
+            scatterSeries.add(x, y);
+            minX = Math.min(minX, x);
+            maxX = Math.max(maxX, x);
+        }
+        XYSeries regressionSeries = new XYSeries("Regression Line");
+        for (double x = minX; x <= maxX; x += (maxX - minX) / 100) {
+            regressionSeries.add(x, analysis.predict(x));
+        }
+
+        XYSeriesCollection dataset = new XYSeriesCollection();
+
+        dataset.addSeries(scatterSeries);
+        dataset.addSeries(regressionSeries);
+
+        JFreeChart scatterPlot = ChartFactory.createScatterPlot(
+                "Scatter Plot with Regression: " + yAttribute + " vs " + xAttribute,
+                xAttribute, yAttribute, dataset, PlotOrientation.VERTICAL, true, true, false);
+
+        // Display the chart and ANOVA table
+        JFrame frame = new JFrame("Regression Analysis");
+        frame.setLayout(new BorderLayout());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel chartPanel = new ChartPanel(scatterPlot);
+        chartPanel.setPreferredSize(new Dimension(800, 600));
+
+        JTextArea anovaText = new JTextArea(analysis.getAnovaTable());
+        anovaText.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        anovaText.setEditable(false);
+
+        frame.add(chartPanel, BorderLayout.CENTER);
+        frame.add(new JScrollPane(anovaText), BorderLayout.SOUTH);
+
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     private JFreeChart createScatterPlot(List<Car> cars, String xAttribute, String yAttribute) {
         XYSeries series = new XYSeries(yAttribute + " vs " + xAttribute);
         for (Car car : cars) {
