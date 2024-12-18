@@ -10,23 +10,25 @@ public class Car {
     private double roadTax;
     private double mpg;
     private double engineSize;
+    private String typeCar; // New field for type_car
 
-    // constructor1
+    // Constructor1
     public Car() {
         this.model = "";
         this.year = 0;
         this.price = 0.0;
-        this.transmission = ""; // Updated position
-        this.mileage = 0;       // Updated position
+        this.transmission = "";
+        this.mileage = 0;
         this.fuelType = "";
         this.roadTax = 0.0;
         this.mpg = 0.0;
         this.engineSize = 0.0;
+        this.typeCar = ""; // Initialize type_car
     }
 
     // Constructor2
     public Car(String model, int year, double price, int mileage,
-               String fuelType, String transmission, double roadTax, double mpg, double engineSize) {
+               String fuelType, String transmission, double roadTax, double mpg, double engineSize, String typeCar) {
         this.model = model;
         this.year = year;
         this.price = price;
@@ -36,9 +38,10 @@ public class Car {
         this.roadTax = roadTax;
         this.mpg = mpg;
         this.engineSize = engineSize;
+        this.typeCar = typeCar; // Set type_car
     }
 
-    // getters and setters
+    // Getters and setters
     public String getModel() { return model; }
     public void setModel(String model) { this.model = model; }
 
@@ -66,9 +69,12 @@ public class Car {
     public double getEngineSize() { return engineSize; }
     public void setEngineSize(double engineSize) { this.engineSize = engineSize; }
 
+    public String getTypeCar() { return typeCar; } // Getter for type_car
+    public void setTypeCar(String typeCar) { this.typeCar = typeCar; } // Setter for type_car
+
     @Override
     public String toString() {
-        return String.format("Car[Model=%s, Year=%d, Price=%.2f, Transmission=%s, Mileage=%d, FuelType=%s, RoadTax=%.2f, MPG=%.2f, EngineSize=%.2f]",
-                model, year, price, transmission, mileage, fuelType, roadTax, mpg, engineSize);
+        return String.format("Car[Model=%s, Year=%d, Price=%.2f, Transmission=%s, Mileage=%d, FuelType=%s, RoadTax=%.2f, MPG=%.2f, EngineSize=%.2f, TypeCar=%s]",
+                model, year, price, transmission, mileage, fuelType, roadTax, mpg, engineSize, typeCar); // Include type_car
     }
 }

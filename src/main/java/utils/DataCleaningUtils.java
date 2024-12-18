@@ -1,11 +1,14 @@
 package utils;
 
+import model.Car;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class DataCleaningUtils {
+
     public static Object[][] cleanData(Object[][] data, String placeholder) {
-        Object[][] cleanedData = new Object[data.length][data[0].length];
+        Object[][] cleanedData = new Object[data.length][];
         for (int i = 0; i < data.length; i++) {
             cleanedData[i] = cleanRow(data[i], placeholder);
         }
@@ -13,51 +16,85 @@ public class DataCleaningUtils {
     }
 
     private static Object[] cleanRow(Object[] row, String placeholder) {
-        List<Object> rowList = new ArrayList<>(Arrays.asList(row));
-        for (int i = 0; i < row.length; i++) {
-            if (i == 0 || i == 3 || i == 5) { // Categorical columns
-                rowList.set(i, cleanCategoricalColumn(row[i], placeholder));
-            } else if (i == 1 || i == 2 || i == 4 || i == 6 || i == 7 || i == 8) {
-                if (row[i] != null && !isNumeric(row[i].toString())) {
-                    rowList.set(i, placeholder);
-                }
-            }
-        }
-        rowList = removeDuplicate(rowList);
-        rowList = fillMissing(rowList, placeholder);
-        return rowList.toArray();
+        List<Object> filledRow = fillMissing(row, placeholder);
+        filledRow = cleanRow(filledRow);
+        filledRow = removeDuplicate(filledRow);
+        return filledRow.toArray();
     }
 
-    private static Object cleanCategoricalColumn(Object value, String placeholder) {
-        if (value != null && isNumeric(value.toString())) {
-            return placeholder;
-        }
-        return (value == null || value.toString().trim().isEmpty()) ? placeholder : value.toString().trim();
+    private static List<Object> cleanRow(List<Object> row) {
+        return row.stream().filter(value -> isValid(value) && !isNumeric(value.toString())).map(value -> value.toString().trim()).collect(Collectors.toList());
     }
 
-    public static boolean isNumeric(String str) {
+    private static boolean isNumeric(String value) {
         try {
-            Double.parseDouble(str);
+            Double.parseDouble(value);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
-
     }
 
-    public static boolean isAlphabetic(String str) {
-        return str != null && str.matches("^[a-zA-Z-_]+$");
+    private static boolean isValid(Object value) {
+        return value != null && !value.toString().trim().isEmpty();
     }
 
     private static List<Object> removeDuplicate(List<Object> row) {
         return new ArrayList<>(new LinkedHashSet<>(row));
     }
 
-    private static List<Object> fillMissing(List<Object> row, String placeholder) {
-        return row.stream().map(value -> (value == null || value.toString().trim().isEmpty()) ? placeholder : value).collect(Collectors.toList());
+    private static List<Object> fillMissing(Object[] row, String placeholder) {
+        return Arrays.stream(row).map(value -> (value == null || value.toString().trim().isEmpty()) ? placeholder : value).collect(Collectors.toList());
     }
 
-    public static List<Object[]> extractValidPairs(Object[][] data, int col1Index, int col2Index) {
-        return Arrays.stream(data).filter(row -> row != null && row.length > Math.max(col1Index, col2Index)).filter(row -> row[col1Index] != null && row[col2Index] != null).filter(row -> (isNumeric(row[col1Index].toString()) || isAlphabetic(row[col1Index].toString())) && (isNumeric(row[col2Index].toString()) || isAlphabetic(row[col2Index].toString()))).collect(Collectors.toList());
+    public static List<Car> cleanCarData(List<Car> cars, String placeholder) {
+        return cars.stream().map(car -> cleanCar(car, placeholder)).collect(Collectors.toList());
     }
+
+    private static Car cleanCar(Car car, String placeholder) {
+        if (isNullOrEmpty(car.getModel())) {
+            car.setModel(placeholder);
+        } else {
+            car.setModel(car.getModel().trim());
+        }
+        if (car.getYear() <= 0) {
+            car.setYear(0);
+        }
+        if (car.getPrice() < 0) {
+            car.setPrice(0.0);
+        }
+        if (isNullOrEmpty(car.getTransmission())) {
+            car.setTransmission(placeholder);
+        } else {
+            car.setTransmission(car.getTransmission().trim());
+        }
+        if (car.getMileage() < 0) {
+            car.setMileage(0);
+        }
+        if (isNullOrEmpty(car.getFuelType())) {
+            car.setFuelType(placeholder);
+        } else {
+            car.setFuelType(car.getFuelType().trim());
+        }
+        if (car.getRoadTax() < 0) {
+            car.setRoadTax(0.0);
+        }
+        if (car.getMpg() < 0) {
+            car.setMpg(0.0);
+        }
+        if (car.getEngineSize() < 0) {
+            car.setEngineSize(0.0);
+        }
+        if (isNullOrEmpty(car.getTypeCar())) {
+            car.setTypeCar(placeholder);
+        } else {
+            car.setTypeCar(car.getTypeCar().trim());
+        }
+        return car;
     }
+
+    private static boolean isNullOrEmpty(String value) {
+        return value == null || value.trim().isEmpty();
+    }
+
+}

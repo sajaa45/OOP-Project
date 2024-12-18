@@ -21,6 +21,7 @@ import java.util.List;
 
 public class DataVisualizationService {
     private DataAnalysisService analysis;
+
     public static JFreeChart plotHistogram(double[] data, String title, String xLabel, String yLabel) {
         HistogramDataset dataset = new HistogramDataset();
         dataset.addSeries("Frequency", data, 10);
@@ -41,7 +42,6 @@ public class DataVisualizationService {
 
     public static void displayChart(JFreeChart[] charts) {
         int numCharts = charts.length;
-
         if (numCharts == 0) {
             System.out.println("No charts to display.");
             return;
@@ -64,90 +64,61 @@ public class DataVisualizationService {
         chartFrame.setVisible(true);
     }
 
-    // Constructor that accepts DataAnalysisService
     public DataVisualizationService(DataAnalysisService analysis) {
         this.analysis = analysis;
     }
 
-    // Method to create a scatter plot matrix
     public void createScatterPlotMatrix(List<Car> cars, List<String> attributes) {
         int numAttributes = attributes.size();
         JFrame frame = new JFrame("Scatter Plot Matrix");
-        frame.setLayout(new GridLayout(numAttributes, numAttributes)); // Grid layout for the matrix
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel matrixPanel = new JPanel();
+        matrixPanel.setLayout(new GridLayout(numAttributes, numAttributes));
 
         for (int row = 0; row < numAttributes; row++) {
-            for (int col = 0; col < numAttributes; col++) {
-                String xAttribute = attributes.get(col);
-                String yAttribute = attributes.get(row);
-
-                // Create scatter plot for the current attribute pair
-                JFreeChart chart = createScatterPlot(cars, xAttribute, yAttribute);
+                String xAttribute = attributes.get(row);
+                JFreeChart chart = createScatterPlotWithRegression(cars, xAttribute, "price");
                 ChartPanel chartPanel = new ChartPanel(chart);
-                chartPanel.setPreferredSize(new Dimension(200, 200)); // Set size for each plot
-                frame.add(chartPanel); // Add the plot to the frame
-            }
-        }
+                chartPanel.setPreferredSize(new Dimension(400, 300)); // Set a fixed size for each chart
+                matrixPanel.add(chartPanel);
 
+        }
+        matrixPanel.setPreferredSize(new Dimension(300 * numAttributes, 300 * numAttributes));
+
+
+        frame.add(matrixPanel);
         frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ensure the application exits on close
+        frame.setLocationRelativeTo(null); // Center the frame
         frame.setVisible(true);
     }
-//    creating scatter plot with regression
-    public void createScatterPlotWithRegression(List<Car> cars, String xAttribute, String yAttribute) {
+
+    public JFreeChart createScatterPlotWithRegression(List<Car> cars, String xAttribute, String yAttribute) {
         XYSeries scatterSeries = new XYSeries("Data Points");
+        double minX = Double.MAX_VALUE, maxX = Double.MIN_VALUE;
 
         for (Car car : cars) {
-            double xValue = analysis.getAttributeValue(car, xAttribute);
-            double yValue = analysis.getAttributeValue(car, yAttribute);
-            scatterSeries.add(xValue, yValue);
+            double x = analysis.getAttributeValue(car, xAttribute);
+            double y = analysis.getAttributeValue(car, yAttribute);
+            scatterSeries.add(x, y);
+            minX = Math.min(minX, x);
+            maxX = Math.max(maxX, x);
         }
 
-        XYSeriesCollection dataset = new XYSeriesCollection(scatterSeries);
-
-        double minX = scatterSeries.getMinX();
-        double maxX = scatterSeries.getMaxX();
         XYSeries regressionSeries = new XYSeries("Regression Line");
-        regressionSeries.add(minX, analysis.predict(minX));
-        regressionSeries.add(maxX, analysis.predict(maxX));
+        for (double x = minX; x <= maxX; x += (maxX - minX) / 100) {
+            regressionSeries.add(x, analysis.predict(x));
+        }
+        analysis.performRegression(cars, xAttribute, yAttribute);
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        dataset.addSeries(scatterSeries);
         dataset.addSeries(regressionSeries);
 
         JFreeChart scatterPlot = ChartFactory.createScatterPlot(
-                yAttribute + " vs " + xAttribute,
-                xAttribute,
-                yAttribute,
-                dataset,
-                PlotOrientation.VERTICAL,
-                true,
-                true,
-                false
-        );
+                "Scatter Plot with Regression: " + yAttribute + " vs " + xAttribute,
+                xAttribute, yAttribute, dataset, PlotOrientation.VERTICAL, true, true, false);
 
-        JFrame frame = new JFrame("Scatter Plot with Regression");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new ChartPanel(scatterPlot));
-        frame.pack();
-        frame.setVisible(true);
+        return scatterPlot; // Return the chart instead of displaying it
     }
 
-    // Method to create a single scatter plot
-    private JFreeChart createScatterPlot(List<Car> cars, String xAttribute, String yAttribute) {
-        XYSeries series = new XYSeries(yAttribute + " vs " + xAttribute);
-        for (Car car : cars) {
-            double xValue = analysis.getAttributeValue(car, xAttribute);
-            double yValue = analysis.getAttributeValue(car, yAttribute);
-            series.add(xValue, yValue);
-        }
-
-        XYSeriesCollection dataset = new XYSeriesCollection(series);
-        return ChartFactory.createScatterPlot(
-                yAttribute + " vs " + xAttribute, // Title
-                xAttribute, // X-Axis label
-                yAttribute, // Y-Axis label
-                dataset,
-                PlotOrientation.VERTICAL,
-                false, // No legend for individual plots
-                true,
-                false
-        );
-    }
 }
