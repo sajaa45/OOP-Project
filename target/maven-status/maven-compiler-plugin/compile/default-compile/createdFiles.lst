@@ -1,0 +1,16 @@
+service\ReportGenerator.class
+controller\DataAnalysisController.class
+model\Car.class
+controller\ReportController.class
+controller\DataUploadController.class
+main\Main.class
+repository\CarRepository.class
+service\MLService.class
+service\DataAnalysisService.class
+service\DataIngestionService.class
+controller\DataUploadController$1.class
+repository\DataLoader.class
+utils\dbConnect.class
+service\DataVisualizationService.class
+controller\VisualizationController.class
+utils\DataCleaningUtils.class
