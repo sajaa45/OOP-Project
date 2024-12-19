@@ -1,13 +1,15 @@
 package service;
 
 import model.Car;
+import interfaces.AdvancedDataAnalysis;
+
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.jfree.chart.JFreeChart;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DataAnalysisService {
+public class DataAnalysisService implements AdvancedDataAnalysis {
 
     private double regressionSlope;
     private double regressionIntercept;
