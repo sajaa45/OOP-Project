@@ -24,10 +24,8 @@ public class Main {
             data = controller.getData();
             if (!data.isEmpty()) {
                 carRepository.processRawData(data);
-                carRepository.processRawData(data);
                 List<Car> carList = carRepository.getCars();
                 List<Car> cleanedCarList = DataCleaningUtils.cleanCarData(carList, "N/A");
-
 
                 System.out.println("\n--- Numerical Analysis ---");
                 analysis.analyzeNumericalData(cleanedCarList, new String[]{"year", "price", "mileage", "roadTax", "mpg", "engineSize"} );

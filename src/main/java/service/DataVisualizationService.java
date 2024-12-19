@@ -20,7 +20,12 @@ import java.util.Map;
 import java.util.List;
 
 public class DataVisualizationService {
+
     private DataAnalysisService analysis;
+
+    public DataVisualizationService(DataAnalysisService analysis) {
+        this.analysis = analysis;
+    }
 
     public static JFreeChart plotHistogram(double[] data, String title, String xLabel, String yLabel) {
         HistogramDataset dataset = new HistogramDataset();
@@ -64,32 +69,29 @@ public class DataVisualizationService {
         chartFrame.setVisible(true);
     }
 
-    public DataVisualizationService(DataAnalysisService analysis) {
-        this.analysis = analysis;
-    }
-
     public void createScatterPlotMatrix(List<Car> cars, List<String> attributes) {
-        int numAttributes = attributes.size();
+
+        int gridSize = 2;
+
         JFrame frame = new JFrame("Scatter Plot Matrix");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         JPanel matrixPanel = new JPanel();
-        matrixPanel.setLayout(new GridLayout(numAttributes, numAttributes));
+        matrixPanel.setLayout(new GridLayout(gridSize, gridSize));
 
-        for (int row = 0; row < numAttributes; row++) {
-                String xAttribute = attributes.get(row);
-                JFreeChart chart = createScatterPlotWithRegression(cars, xAttribute, "price");
-                ChartPanel chartPanel = new ChartPanel(chart);
-                chartPanel.setPreferredSize(new Dimension(400, 300)); // Set a fixed size for each chart
-                matrixPanel.add(chartPanel);
-
+        for (String xAttribute : attributes) {
+            JFreeChart chart = createScatterPlotWithRegression(cars, xAttribute, "price");
+            ChartPanel chartPanel = new ChartPanel(chart);
+            chartPanel.setPreferredSize(new Dimension(600, 600));
+            matrixPanel.add(chartPanel);
         }
-        matrixPanel.setPreferredSize(new Dimension(300 * numAttributes, 300 * numAttributes));
-
-
+        int totalCells = gridSize * gridSize;
+        for (int i = attributes.size(); i < totalCells; i++) {
+            JPanel emptyPanel = new JPanel();
+            matrixPanel.add(emptyPanel);
+        }
         frame.add(matrixPanel);
         frame.pack();
-        frame.setLocationRelativeTo(null); // Center the frame
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -118,7 +120,7 @@ public class DataVisualizationService {
                 "Scatter Plot with Regression: " + yAttribute + " vs " + xAttribute,
                 xAttribute, yAttribute, dataset, PlotOrientation.VERTICAL, true, true, false);
 
-        return scatterPlot; // Return the chart instead of displaying it
+        return scatterPlot;
     }
 
 }
