@@ -6,7 +6,6 @@ import java.util.List;
 import model.Car;
 
 public class CarRepository {
-
     private List<Car> cars = new ArrayList<>();
     private Object[][] data;
 
@@ -17,56 +16,54 @@ public class CarRepository {
             if (i == 0 || row.get(0).equalsIgnoreCase("model")) {
                 continue;
             }
-            // Validate row length (now 10 to include type_car)
+            // Validate row length
             if (row.size() != 10) {
-                System.err.println("Invalid row size at index " + i + ": " + row);
+                System.err.println("Invalid row size: " + row);
                 continue;
             }
             try {
-                String model = row.get(0).trim(); // Trim leading/trailing spaces
-                int year = Integer.parseInt(removeExtraQuotes(row.get(1).trim())); // Trim and parse year
-                double price = Double.parseDouble(removeExtraQuotes(row.get(2).trim())); // Trim and parse price
-                String transmission = row.get(3).trim(); // Trim transmission
-                int mileage = Integer.parseInt(removeExtraQuotes(row.get(4).trim())); // Trim and parse mileage
-                String fuelType = row.get(5).trim(); // Trim fuel type
-                double roadTax = Double.parseDouble(removeExtraQuotes(row.get(6).trim())); // Trim and parse road tax
-                double mpg = Double.parseDouble(removeExtraQuotes(row.get(7).trim())); // Trim and parse mpg
-                double engineSize = Double.parseDouble(removeExtraQuotes(row.get(8).trim())); // Trim and parse engine size
-                String typeCar = row.get(9).trim(); // Trim type_car
+                // Trim and sanitize each field
+                String model = row.get(0).trim();
+                int year = parseInteger(row.get(1), "Year");
+                double price = parseDouble(row.get(2), "Price");
+                String transmission = row.get(3).trim();
+                int mileage = parseInteger(row.get(4), "Mileage");
+                String fuelType = row.get(5).trim();
 
-                Car car = new Car(model, year, price, mileage, fuelType, transmission, roadTax, mpg, engineSize, typeCar);
+                double roadTax = parseDouble(row.get(6), "Road Tax");
+                double mpg = parseDouble(row.get(7), "MPG");
+                double engineSize = parseDouble(row.get(8), "Engine Size");
+                String car_type = row.get(9).trim();
+
+                Car car = new Car(model, year, price, transmission, mileage, fuelType, roadTax, mpg, engineSize, car_type);
                 cars.add(car);
-            } catch (NumberFormatException e) {
-                System.err.println("Number format error processing row at index " + i + ": " + row);
-                e.printStackTrace();
             } catch (Exception e) {
-                System.err.println("Error processing row at index " + i + ": " + row);
+                System.err.println("Error processing row: " + row);
                 e.printStackTrace();
             }
         }
         populate2DArray();
     }
 
-    // Helper method to remove extra quotes
-    private String removeExtraQuotes(String value) {
-        return value.replaceAll("^\"|\"$", "").trim(); // Remove leading and trailing quotes
-    }
     private void populate2DArray() {
         int rows = cars.size();
-        int cols = 10; // Update column count to 10 to include type_car
+        int cols = 10;
         data = new Object[rows][cols];
         for (int i = 0; i < rows; i++) {
             Car car = cars.get(i);
+            // Vehicle fields
             data[i][0] = car.getModel();
             data[i][1] = car.getYear();
             data[i][2] = car.getPrice();
-            data[i][3] = car.getMileage();
-            data[i][4] = car.getFuelType();
-            data[i][5] = car.getTransmission();
+            data[i][3] = car.getTransmission();
+            data[i][4] = car.getMileage();
+            data[i][5] = car.getFuelType();
+
+            // Car-specific fields
             data[i][6] = car.getRoadTax();
             data[i][7] = car.getMpg();
             data[i][8] = car.getEngineSize();
-            data[i][9] = car.getTypeCar(); // Add type_car to the array
+            data[i][9] = car.getCarType();
         }
     }
 
@@ -76,5 +73,25 @@ public class CarRepository {
 
     public List<Car> getCars() {
         return cars;
+    }
+
+    // Helper method to parse integers safely
+    private int parseInteger(String value, String columnName) {
+        try {
+            return Integer.parseInt(value.trim().replace("\"", ""));
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid integer in column '" + columnName + "': " + value);
+            return -1; // Use a default value or handle this case as needed
+        }
+    }
+
+    // Helper method to parse doubles safely
+    private double parseDouble(String value, String columnName) {
+        try {
+            return Double.parseDouble(value.trim().replace("\"", ""));
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid double in column '" + columnName + "': " + value);
+            return -1.0; // Use a default value or handle this case as needed
+        }
     }
 }

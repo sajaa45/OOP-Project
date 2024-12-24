@@ -5,14 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout">
-      <change afterPath="$PROJECT_DIR$/src/main/java/interfaces/AdvancedDataAnalysis.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/interfaces/GeneralDataAnalysis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/DataAnalysisInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataAnalysisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/DataAnalysisService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interfaces/DataAnalysisInterface$DataAnalysisServiceInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interfaces/DataAnalysisInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/DataUploadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/DataUploadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ReportController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/CarRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/CarRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/DataLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataAnalysisService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataIngestionService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataVisualizationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/MLService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/ReportGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/DataCleaningUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/DataCleaningUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/dbConnect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/DataUploadController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/DataUploadController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/DataUploadController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controller/DataUploadController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controller/ReportController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Car.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Car.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/repository/CarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/repository/CarRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/repository/DataLoader.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/service/DataAnalysisService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/service/DataIngestionService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/service/DataVisualizationService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/service/MLService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/service/ReportGenerator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utils/DataCleaningUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utils/DataCleaningUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utils/dbConnect.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +44,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -36,12 +58,12 @@
     &quot;assignee&quot;: &quot;sajaa45&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/sajaa45/OOP-Project",
-    "accountId": "e7b50d8e-5b4f-42e1-a66c-4eef9cb763b6"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/sajaa45/OOP-Project&quot;,
+    &quot;accountId&quot;: &quot;972f39e0-81e7-4216-9f69-e08102a3181c&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -50,28 +72,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
-      </set>
-    </attachedChunks>
-  </component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -105,7 +119,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/repository/CarRepository.java</url>
-          <line>12</line>
+          <line>96</line>
           <properties class="repository.CarRepository">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
