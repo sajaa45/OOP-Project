@@ -165,7 +165,7 @@ public class DataAnalysisService implements AdvancedDataAnalysis {
                         case "model": return car.getModel();
                         case "transmission": return car.getTransmission();
                         case "fuelType": return car.getFuelType();
-                        case "car_type": return car.getCarType();
+                        case "typeCar": return car.getCarType();
                         default: return "";
                     }
                 })

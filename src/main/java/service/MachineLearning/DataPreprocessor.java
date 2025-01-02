@@ -85,24 +85,12 @@ public class DataPreprocessor {
     public void preprocessAndDisplayData(Object[][] data, double varianceThreshold) {
         // Step 1: Clean the data
         this.cleanedData = DataCleaningUtils.cleanData(data, MISSING_VALUE_PLACEHOLDER);
-        for (int i = 0; i < 10 && i < cleanedData.length; i++) {
-            System.out.println(Arrays.toString(cleanedData[i]));
-        }
-
 
         // Step 2: Encode categorical variables
         this.encodedData = encodeCategoricalVariables(this.cleanedData);
-        for (int i = 0; i < 10 && i < encodedData.length; i++) {
-            System.out.println(Arrays.toString(encodedData[i]));
-        }
-
 
         // Step 3: Normalize numerical data
         this.normalizedData = applyNormalization(this.encodedData);
-        for (int i = 0; i < 10 && i < normalizedData.length; i++) {
-            System.out.println(Arrays.toString(normalizedData[i]));
-        }
-
 
         // Step 4: Apply PCA
         double[][] numericData = convertToDoubleArray(this.normalizedData);
@@ -110,13 +98,8 @@ public class DataPreprocessor {
         this.reducedData = applyPCA(this.normalizedData, nComponents);
 
 
-        // Optionally display the reduced data
-        for (int i = 0; i < 10 && i < reducedData.length; i++) {
-            System.out.println(Arrays.toString(reducedData[i]));
-        }
-
-
-        displayData(this.reducedData);
+        // Split the reduced data into training, validation, and test sets
+        Map<String, Object[][]> splits = splitData(this.reducedData);
     }
 
 
@@ -129,12 +112,36 @@ public class DataPreprocessor {
         return this.reducedData;
     }
 
-
-    // Utility method to display data
-    public void displayData(Object[][] data) {
-        for (Object[] row : data) {
-            System.out.println(Arrays.toString(row));
+    // Method to split the reduced data into training, validation, and test sets
+    public Map<String, Object[][]> splitData(Object[][] data) {
+        if (data == null || data.length == 0) {
+            throw new IllegalArgumentException("Input data cannot be null or empty.");
         }
+
+        int totalRows = data.length;
+        int trainSize = (int) (totalRows * TRAIN_RATIO);
+        int validationSize = (int) (totalRows * VALIDATION_RATIO);
+        int testSize = totalRows - trainSize - validationSize;
+
+        // Shuffle the data for randomization
+        List<Object[]> dataList = Arrays.asList(data);
+        Collections.shuffle(dataList, new Random());
+
+        // Convert the list back to array after shuffling
+        Object[][] shuffledData = dataList.toArray(new Object[0][0]);
+
+        // Split the data
+        Object[][] trainData = Arrays.copyOfRange(shuffledData, 0, trainSize);
+        Object[][] validationData = Arrays.copyOfRange(shuffledData, trainSize, trainSize + validationSize);
+        Object[][] testData = Arrays.copyOfRange(shuffledData, trainSize + validationSize, totalRows);
+
+        // Store the splits in a map for easy access
+        Map<String, Object[][]> splitDataMap = new HashMap<>();
+        splitDataMap.put("train", trainData);
+        splitDataMap.put("validation", validationData);
+        splitDataMap.put("test", testData);
+
+        return splitDataMap;
     }
 
 
@@ -144,9 +151,7 @@ public class DataPreprocessor {
             throw new IllegalArgumentException("Input data cannot be null or empty.");
         }
 
-
         List<Object[]> encodedDataList = new ArrayList<>();
-
 
         for (Object[] row : data) {
             List<Object> encodedRow = new ArrayList<>();
@@ -210,7 +215,6 @@ public class DataPreprocessor {
         return normalizedData;
     }
 
-
     // Helper method to check if a column is numeric
     private static boolean isNumericColumn(Object[][] data, int col) {
         // Ensure that the column index is valid
@@ -226,7 +230,6 @@ public class DataPreprocessor {
         return false;
     }
 
-
     // Helper methods for mean and standard deviation
     private static double calculateMean(Object[][] data, int col) {
         double sum = 0;
@@ -239,7 +242,6 @@ public class DataPreprocessor {
         }
         return count == 0 ? 0 : sum / count;
     }
-
 
     private static double calculateStdDev(Object[][] data, int col, double mean) {
         double sumSquaredDiff = 0;
@@ -254,23 +256,19 @@ public class DataPreprocessor {
         return count == 0 ? 1 : Math.sqrt(sumSquaredDiff / count); // Avoid division by zero
     }
 
-
     private int determineNumberOfComponents(double[][] data, double varianceThreshold) {
         // Convert data to RealMatrix
         RealMatrix matrix = MatrixUtils.createRealMatrix(data);
 
-
         // Perform Singular Value Decomposition
         SingularValueDecomposition svd = new SingularValueDecomposition(matrix);
         double[] singularValues = svd.getSingularValues();
-
 
         // Calculate the total variance (sum of squared singular values)
         double totalVariance = 0;
         for (double value : singularValues) {
             totalVariance += Math.pow(value, 2);
         }
-
 
         // Calculate cumulative explained variance
         double cumulativeVariance = 0;
@@ -283,17 +281,14 @@ public class DataPreprocessor {
             }
         }
 
-
         LOGGER.info("Number of components: " + numComponents);
         return numComponents;
     }
-
 
     // Apply PCA to reduce dimensionality of data
     private Object[][] applyPCA(Object[][] data, int nComponents) {
         // Convert the data to a double[][] for PCA
         double[][] numericData = convertToDoubleArray(data);
-
 
         // Perform Singular Value Decomposition (SVD)
         RealMatrix matrix = MatrixUtils.createRealMatrix(numericData);
@@ -301,15 +296,12 @@ public class DataPreprocessor {
         RealMatrix U = svd.getU();
         RealMatrix S = svd.getS();
 
-
         // Create reduced data matrix by selecting the first 'nComponents' principal components
         RealMatrix reducedDataMatrix = U.getSubMatrix(0, U.getRowDimension() - 1, 0, nComponents - 1);
-
 
         // Convert the reduced data matrix back to Object[][] for compatibility
         return convertToObjectArray(reducedDataMatrix);
     }
-
 
     // Convert data to double array for PCA
     private static double[][] convertToDoubleArray(Object[][] data) {
@@ -329,7 +321,6 @@ public class DataPreprocessor {
         }
         return result;
     }
-
 
     // Convert a RealMatrix to Object[][] format
     private static Object[][] convertToObjectArray(RealMatrix matrix) {
