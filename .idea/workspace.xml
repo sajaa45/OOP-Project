@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout">
-      <change afterPath="$PROJECT_DIR$/src/main/java/interfaces/AdvancedDataAnalysis.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/interfaces/GeneralDataAnalysis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/DataAnalysisInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataAnalysisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/DataAnalysisService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interfaces/DataAnalysisInterface$DataAnalysisServiceInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interfaces/DataAnalysisInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/service/DataAnalysisService.class" beforeDir="false" />
-    </list>
+    <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,11 +23,11 @@
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
+    &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;sajaa45&quot;
-  }
-}</component>
+    }
+    }</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/sajaa45/OOP-Project",
@@ -44,8 +35,8 @@
   }
 }]]></component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 5
-}</component>
+    &quot;associatedIndex&quot;: 5
+    }</component>
   <component name="ProjectId" id="2pj1yp9dF2ZTEyCqd9IqFoj82Wb" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
