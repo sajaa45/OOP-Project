@@ -194,13 +194,22 @@ public class DataPreprocessor {
         // Store the splits in a map for easy access
         Map<String, Object[][]> splitDataMap = new HashMap<>();
         splitDataMap.put("train_features", trainFeatures);
-        splitDataMap.put("train_target", new Object[][]{trainTarget});
+        splitDataMap.put("train_target", convertTo2DArray(trainTarget));  // Proper conversion to 2D array
         splitDataMap.put("validation_features", validationFeatures);
-        splitDataMap.put("validation_target", new Object[][]{validationTarget});
+        splitDataMap.put("validation_target", convertTo2DArray(validationTarget));  // Proper conversion to 2D array
         splitDataMap.put("test_features", testFeatures);
-        splitDataMap.put("test_target", new Object[][]{testTarget});
+        splitDataMap.put("test_target", convertTo2DArray(testTarget));  // Proper conversion to 2D array
 
         return splitDataMap;
+    }
+
+    // Helper method to convert 1D array to 2D array
+    private Object[][] convertTo2DArray(Object[] array) {
+        Object[][] result = new Object[array.length][1];
+        for (int i = 0; i < array.length; i++) {
+            result[i][0] = array[i];
+        }
+        return result;
     }
 
 
