@@ -7,12 +7,9 @@
     <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Car.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/CarRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/CarRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataAnalysisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataAnalysisService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/DataPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/DataPreprocessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Car.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Car.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/DataCleaningUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/DataCleaningUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utils/DataCleaningUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utils/DataCleaningUtils.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +53,7 @@
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;aya&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;aya__sa&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,

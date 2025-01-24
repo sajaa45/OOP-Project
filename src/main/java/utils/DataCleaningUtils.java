@@ -29,7 +29,11 @@ public class DataCleaningUtils {
     }
 
     private static List<Object> cleanRow(List<Object> row) {
-        return row.stream().filter(value -> isValid(value) && !isNumeric(value.toString())).map(value -> value.toString().trim()).collect(Collectors.toList());
+        // return row.stream().filter(value -> isValid(value) && !isNumeric(value.toString())).map(value -> value.toString().trim()).collect(Collectors.toList());
+        return row.stream()
+                .filter(value -> isValid(value))
+                .map(value -> value.toString().trim())
+                .collect(Collectors.toList());
     }
 
     private static boolean isNumeric(String value) {

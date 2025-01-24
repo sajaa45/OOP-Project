@@ -64,17 +64,23 @@ public class Main {
 
             // Preprocess and retrieve split data
             preprocessor.preprocessAndDisplayData(rawDataForPCA, varianceThreshold);
-            Map<String, Object[][]> splitDataMap = preprocessor.splitData(preprocessor.getReducedData());
+            Map<String, Object[][]> splitDataMap = preprocessor.splitData(preprocessor.getReducedData(), preprocessor.extractTargetVariable(preprocessor.getNormalizedData()));
 
             // Retrieve individual splits
-            Object[][] trainData = splitDataMap.get("train");
-            Object[][] validationData = splitDataMap.get("validation");
-            Object[][] testData = splitDataMap.get("test");
+            Object[][] trainFeatures = splitDataMap.get("train_features");
+            Object[][] trainTarget = splitDataMap.get("train_target");
+            Object[][] validationFeatures = splitDataMap.get("validation_features");
+            Object[][] validationTarget = splitDataMap.get("validation_target");
+            Object[][] testFeatures = splitDataMap.get("test_features");
+            Object[][] testTarget = splitDataMap.get("test_target");
 
             // Log split sizes
-            System.out.println("Training data size: " + trainData.length);
-            System.out.println("Validation data size: " + validationData.length);
-            System.out.println("Test data size: " + testData.length);
+            System.out.println("Training features size: " + trainFeatures.length);
+            System.out.println("Training target size: " + trainTarget[0].length);
+            System.out.println("Validation features size: " + validationFeatures.length);
+            System.out.println("Validation target size: " + validationTarget[0].length);
+            System.out.println("Test features size: " + testFeatures.length);
+            System.out.println("Test target size: " + testTarget[0].length);
 
             // Ready for ML tasks
             System.out.println("Data has been successfully reduced, split, and is ready for Machine Learning.");
