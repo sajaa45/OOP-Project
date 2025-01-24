@@ -12,10 +12,35 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Map;
 
-public class Main {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        // Load the FXML file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/main_scene.fxml"));
+
+        // Set the scene
+        Scene scene = new Scene(loader.load());
+
+        // Configure the stage
+        stage.setTitle("Car Analysis Application");
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
     public static void main(String[] args) {
-        // Initialize components
+        // Launch the JavaFX application
+        launch(args);
+    }
+
+    void processData() {
+        // Initialize components for data processing
         DataUploadController controller = new DataUploadController();
         DataAnalysisService analysis = new DataAnalysisService();
         DataVisualizationAnalysisService visualizer = new DataVisualizationAnalysisService(analysis);
@@ -90,7 +115,7 @@ public class Main {
             return null; // Return null if the list is empty or null
         }
 
-        Object[][] dataArray = new Object[cleanedCarList.size()][];
+        Object[][] dataArray = new Object[cleanedCarList.size()][];  // Create 2D array for car data
         for (int i = 0; i < cleanedCarList.size(); i++) {
             Car car = cleanedCarList.get(i);
             if (car != null) {
