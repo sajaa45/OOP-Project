@@ -1,4 +1,4 @@
-package service;
+package service.DataAnalysis;
 
 import model.Car;
 import interfaces.AdvancedDataAnalysis;
@@ -119,7 +119,7 @@ public class DataAnalysisService implements AdvancedDataAnalysis {
             appendOutput("Measures of Central Tendency: " + centralTendency);
             Map<String, Double> variability = calculateVariability(columnData);
             appendOutput("Measures of Variability: " + variability);
-            JFreeChart histogram = DataVisualizationService.plotHistogram(columnData, "Histogram for " + attribute, "Value", "Frequency");
+            JFreeChart histogram = DataVisualizationAnalysisService.plotHistogram(columnData, "Histogram for " + attribute, "Value", "Frequency");
             allCharts.add(histogram);
         }
     }
@@ -135,10 +135,10 @@ public class DataAnalysisService implements AdvancedDataAnalysis {
             Map<String, Integer> frequency = calculateFrequency(columnData);
             appendOutput("Frequency Distribution: " + frequency);
             appendOutput("Proportions: " + calculateProportions(frequency, columnData.length));
-            JFreeChart pieChart = DataVisualizationService.plotPieChart(frequency, "Pie Chart for " + attribute);
+            JFreeChart pieChart = DataVisualizationAnalysisService.plotPieChart(frequency, "Pie Chart for " + attribute);
             allCharts.add(pieChart);
         }
-        DataVisualizationService.displayChart(allCharts.toArray(new JFreeChart[0]));
+        DataVisualizationAnalysisService.displayChart(allCharts.toArray(new JFreeChart[0]));
     }
 
     private double[] extractDoubleColumn(List<Car> carList, String attribute) {
@@ -165,7 +165,7 @@ public class DataAnalysisService implements AdvancedDataAnalysis {
                         case "model": return car.getModel();
                         case "transmission": return car.getTransmission();
                         case "fuelType": return car.getFuelType();
-                        case "typeCar": return car.getTypeCar();
+                        case "typeCar": return car.getCarType();
                         default: return "";
                     }
                 })

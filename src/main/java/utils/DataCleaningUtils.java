@@ -8,6 +8,12 @@ import java.util.stream.Collectors;
 public class DataCleaningUtils {
 
     public static Object[][] cleanData(Object[][] data, String placeholder) {
+        // Check if the data array is null or empty before proceeding
+        if (data == null || data.length == 0) {
+            System.out.println("Data array is null or empty");
+            return new Object[0][0]; // Return an empty 2D array or handle the case as necessary
+        }
+
         Object[][] cleanedData = new Object[data.length][];
         for (int i = 0; i < data.length; i++) {
             cleanedData[i] = cleanRow(data[i], placeholder);
@@ -85,10 +91,10 @@ public class DataCleaningUtils {
         if (car.getEngineSize() < 0) {
             car.setEngineSize(0.0);
         }
-        if (isNullOrEmpty(car.getTypeCar())) {
-            car.setTypeCar(placeholder);
+        if (isNullOrEmpty(car.getCarType())) {
+            car.setCarType(placeholder);
         } else {
-            car.setTypeCar(car.getTypeCar().trim());
+            car.setCarType(car.getCarType().trim());
         }
         return car;
     }
@@ -96,5 +102,4 @@ public class DataCleaningUtils {
     private static boolean isNullOrEmpty(String value) {
         return value == null || value.trim().isEmpty();
     }
-
 }

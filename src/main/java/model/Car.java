@@ -1,65 +1,31 @@
 package model;
 
-public class Car {
-    private String model;
-    private int year;
-    private double price;
-    private String transmission;
-    private int mileage;
-    private String fuelType;
+public class Car extends Vehicle{
     private double roadTax;
     private double mpg;
     private double engineSize;
-    private String typeCar; // New field for type_car
+    private String typeCar;
 
-    // Constructor1
+    // Default constructor
     public Car() {
-        this.model = "";
-        this.year = 0;
-        this.price = 0.0;
-        this.transmission = "";
-        this.mileage = 0;
-        this.fuelType = "";
+        super(); // Calls the Vehicle default constructor
         this.roadTax = 0.0;
         this.mpg = 0.0;
         this.engineSize = 0.0;
-        this.typeCar = ""; // Initialize type_car
+        this.typeCar = "";
     }
 
-    // Constructor2
-    public Car(String model, int year, double price, int mileage,
-               String fuelType, String transmission, double roadTax, double mpg, double engineSize, String typeCar) {
-        this.model = model;
-        this.year = year;
-        this.price = price;
-        this.mileage = mileage;
-        this.fuelType = fuelType;
-        this.transmission = transmission;
+    // Parameterized constructor
+    public Car(String model, int year, double price, String transmission, int mileage, String fuelType,
+               double roadTax, double mpg, double engineSize, String typeCar) {
+        super(model, year, price, transmission, mileage, fuelType); // Calls the Vehicle parameterized constructor
         this.roadTax = roadTax;
         this.mpg = mpg;
         this.engineSize = engineSize;
-        this.typeCar = typeCar; // Set type_car
+        this.typeCar = typeCar;
     }
 
-    // Getters and setters
-    public String getModel() { return model; }
-    public void setModel(String model) { this.model = model; }
-
-    public int getYear() { return year; }
-    public void setYear(int year) { this.year = year; }
-
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
-
-    public String getTransmission() { return transmission; }
-    public void setTransmission(String transmission) { this.transmission = transmission; }
-
-    public int getMileage() { return mileage; }
-    public void setMileage(int mileage) { this.mileage = mileage; }
-
-    public String getFuelType() { return fuelType; }
-    public void setFuelType(String fuelType) { this.fuelType = fuelType; }
-
+    // Getters and Setters
     public double getRoadTax() { return roadTax; }
     public void setRoadTax(double roadTax) { this.roadTax = roadTax; }
 
@@ -69,12 +35,13 @@ public class Car {
     public double getEngineSize() { return engineSize; }
     public void setEngineSize(double engineSize) { this.engineSize = engineSize; }
 
-    public String getTypeCar() { return typeCar; } // Getter for type_car
-    public void setTypeCar(String typeCar) { this.typeCar = typeCar; } // Setter for type_car
+    public String getCarType() { return typeCar; }
+    public void setCarType(String car_type) { this.typeCar = typeCar; }
 
     @Override
     public String toString() {
-        return String.format("Car[Model=%s, Year=%d, Price=%.2f, Transmission=%s, Mileage=%d, FuelType=%s, RoadTax=%.2f, MPG=%.2f, EngineSize=%.2f, TypeCar=%s]",
-                model, year, price, transmission, mileage, fuelType, roadTax, mpg, engineSize, typeCar); // Include type_car
+        return String.format("Car[%s, RoadTax=%.2f, MPG=%.2f, EngineSize=%.2f, Car_Type=%s]",
+                super.toString(), roadTax, mpg, engineSize, typeCar);
     }
+
 }

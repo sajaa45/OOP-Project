@@ -1,9 +1,146 @@
 package controller;
 
-import service.DataIngestionService;
+import interfaces.DataUploadInterface;
+import service.DataImporting.FileProcessorService;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import service.DataImporting.DatabaseProcessorService;
+
+
+public class DataUploadController implements DataUploadInterface {
+    private JFrame frame;
+    private JTextArea textArea;
+    private List<List<String>> data;
+
+    public DataUploadController() {
+        this.data = new ArrayList<>();
+        initializeUI();
+    }
+
+    @Override
+    public void processFile(File file) {
+        try {
+            data = FileProcessorService.processFile(file);
+            displayData();
+        } catch (Exception e) {
+            e.printStackTrace();
+            textArea.setText("Error processing file: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void loadDataFromDatabase(String dbUrl, String dbUsername, String dbPassword, String query) {
+        data = new ArrayList<>();
+        DatabaseProcessorService.loadDataFromDatabase(dbUrl, dbUsername, dbPassword, query, data);
+        displayData();
+    }
+
+    @Override
+    public List<List<String>> getData() {
+        return data;
+    }
+
+    private void initializeUI() {
+        frame = new JFrame("Data Upload Example");
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(2, 1)); // Two buttons: one for file and one for database
+
+        JButton fileButton = new JButton("Select CSV or Excel File");
+        JButton databaseButton = new JButton("Load Data from Database");
+
+        textArea = new JTextArea();
+        textArea.setEditable(false);
+
+        panel.add(fileButton);
+        panel.add(databaseButton);
+
+        frame.setLayout(new BorderLayout());
+        frame.add(panel, BorderLayout.NORTH);
+        frame.add(new JScrollPane(textArea), BorderLayout.CENTER);
+
+        // File Button Action Listener
+        fileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showFileChooser();
+            }
+        });
+
+        // Database Button Action Listener
+        databaseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadDataFromDatabaseUI();
+            }
+        });
+
+        frame.setSize(600, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    private void loadDataFromDatabaseUI() {
+        JTextField dbUrlField = new JTextField("jdbc:mysql://localhost:3306/car");
+        JTextField usernameField = new JTextField("root");
+        JPasswordField passwordField = new JPasswordField();
+        JTextField queryField = new JTextField("SELECT * FROM cars");
+
+        Object[] message = {
+                "Database URL:", dbUrlField,
+                "Username:", usernameField,
+                "Password:", passwordField,
+                "Query:", queryField
+        };
+
+        int option = JOptionPane.showConfirmDialog(frame, message, "Database Connection", JOptionPane.OK_CANCEL_OPTION);
+        if (option == JOptionPane.OK_OPTION) {
+            String dbUrl = dbUrlField.getText();
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+            String query = queryField.getText();
+
+            try {
+                loadDataFromDatabase(dbUrl, username, password, query);
+                JOptionPane.showMessageDialog(frame, "Data loaded successfully!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(frame, "Error loading data from database: " + e.getMessage());
+            }
+        }
+    }
+
+    private void showFileChooser() {
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(frame);
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            processFile(file);
+        }
+    }
+
+    private void displayData() {
+        textArea.setText(""); // Clear previous content
+        for (List<String> row : data) {
+            String rowData = String.join("\t", row);
+            textArea.append(rowData + "\n");
+        }
+    }
+}
+
+
+
+
+
+/*package controller;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -124,4 +261,4 @@ public class DataUploadController {
         return data;
     }
 
-}
+}*/

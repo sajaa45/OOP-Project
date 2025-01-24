@@ -1,4 +1,4 @@
-package service;
+package service.DataAnalysis;
 
 import javax.swing.*;
 import model.Car;
@@ -19,11 +19,11 @@ import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.List;
 
-public class DataVisualizationService {
+public class DataVisualizationAnalysisService {
 
-    private DataAnalysisService analysis;
+    private service.DataAnalysis.DataAnalysisService analysis;
 
-    public DataVisualizationService(DataAnalysisService analysis) {
+    public DataVisualizationAnalysisService(DataAnalysisService analysis) {
         this.analysis = analysis;
     }
 
