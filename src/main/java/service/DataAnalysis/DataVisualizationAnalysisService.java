@@ -1,5 +1,6 @@
 package service.DataAnalysis;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import model.Car;
 import org.jfree.chart.ChartFactory;
@@ -15,6 +16,9 @@ import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.data.statistics.HistogramDataset;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.List;
@@ -68,32 +72,42 @@ public class DataVisualizationAnalysisService {
         chartFrame.pack();
         chartFrame.setVisible(true);
     }
+    public static void saveChartAsImage(JFreeChart chart, String fileName) {
+        try {
+            int chartWidth = 600;
+            int chartHeight = 400;
+            BufferedImage chartImage = chart.createBufferedImage(chartWidth, chartHeight);
+            File outputFile = new File(fileName);
+            if (outputFile.exists()) {
+                outputFile.delete();  // Delete the existing file before saving the new one
+            }
+            ImageIO.write(chartImage, "png", outputFile);
 
-    public void createScatterPlotMatrix(List<Car> cars, List<String> attributes) {
-
-        int gridSize = 2;
-
-        JFrame frame = new JFrame("Scatter Plot Matrix");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel matrixPanel = new JPanel();
-        matrixPanel.setLayout(new GridLayout(gridSize, gridSize));
-
-        for (String xAttribute : attributes) {
-            JFreeChart chart = createScatterPlotWithRegression(cars, xAttribute, "price");
-            ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(600, 600));
-            matrixPanel.add(chartPanel);
+            System.out.println("Saved chart as: " + outputFile.getAbsolutePath());
+        } catch (IOException e) {
+            System.err.println("Error saving chart: " + e.getMessage());
+            e.printStackTrace();
         }
-        int totalCells = gridSize * gridSize;
-        for (int i = attributes.size(); i < totalCells; i++) {
-            JPanel emptyPanel = new JPanel();
-            matrixPanel.add(emptyPanel);
-        }
-        frame.add(matrixPanel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
     }
+
+    public void createScatterPlotsAndSave(List<Car> cars, List<String> attributes) {
+        // Loop through each attribute to create and save individual scatter plots
+        for (String xAttribute : attributes) {
+            try {
+                // Create a scatter plot with regression for the current attribute
+                JFreeChart chart = createScatterPlotWithRegression(cars, xAttribute, "price");
+
+                // Save the chart as an image
+                String fileName = "C:\\Users\\LENOVO\\Desktop\\Junior\\project_oop_version2\\data\\numerical_data\\scatter_plot_" + xAttribute + "_vs_price.png";
+                saveChartAsImage(chart, fileName);
+
+            } catch (Exception e) {  // Catching general exception for broader error handling
+                System.err.println("Error generating scatter plot for " + xAttribute + ": " + e.getMessage());
+                e.printStackTrace();  // Print stack trace for debugging
+            }
+        }
+    }
+
 
     public JFreeChart createScatterPlotWithRegression(List<Car> cars, String xAttribute, String yAttribute) {
         XYSeries scatterSeries = new XYSeries("Data Points");

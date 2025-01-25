@@ -121,8 +121,13 @@ public class DataAnalysisService implements AdvancedDataAnalysis {
             appendOutput("Measures of Variability: " + variability);
             JFreeChart histogram = DataVisualizationAnalysisService.plotHistogram(columnData, "Histogram for " + attribute, "Value", "Frequency");
             allCharts.add(histogram);
+
+            // Save the histogram plot as an image
+            String fileName = "C:\\Users\\LENOVO\\Desktop\\Junior\\project_oop_version2\\data\\categorical_data\\histogram_" + attribute + ".png";
+            DataVisualizationAnalysisService.saveChartAsImage(histogram, fileName);
         }
     }
+
 
     public void analyzeCategoricalData(List<Car> carList, String[] categoricalAttributes) {
         for (String attribute : categoricalAttributes) {
@@ -137,9 +142,13 @@ public class DataAnalysisService implements AdvancedDataAnalysis {
             appendOutput("Proportions: " + calculateProportions(frequency, columnData.length));
             JFreeChart pieChart = DataVisualizationAnalysisService.plotPieChart(frequency, "Pie Chart for " + attribute);
             allCharts.add(pieChart);
+
+            // Save the pie chart as an image
+            String fileName = "C:\\Users\\LENOVO\\Desktop\\Junior\\project_oop_version2\\data\\categorical_data\\pie_chart_" + attribute + ".png";
+            DataVisualizationAnalysisService.saveChartAsImage(pieChart, fileName);
         }
-        DataVisualizationAnalysisService.displayChart(allCharts.toArray(new JFreeChart[0]));
     }
+
 
     private double[] extractDoubleColumn(List<Car> carList, String attribute) {
         return carList.stream()

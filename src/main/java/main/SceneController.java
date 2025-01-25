@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,6 +35,8 @@ public class SceneController {
 
     @FXML
     private Button goToNewPageButton; // Button to navigate to the new page
+    @FXML
+    private Button goToDashboardButton; // Button to navigate to the Dashboard
 
     // Initialize method for setting up the controller
     @FXML
@@ -73,6 +74,30 @@ public class SceneController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @FXML
+    public void goToDashboard() {
+        try {
+            // Load the Dashboard.fxml and transition to the dashboard scene
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/Dashboard.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) goToDashboardButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle loading error
+        }
+    }
+
+    @FXML
+    private void onAddDataClicked() {
+        try {
+            Main.processData(); // Assuming Main has a static method `processData`
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Optionally, handle any errors here
         }
     }
 
@@ -117,5 +142,4 @@ public class SceneController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-
 }

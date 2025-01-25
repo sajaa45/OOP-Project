@@ -5,14 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout">
-      <change afterPath="$PROJECT_DIR$/src/main/java/interfaces/AdvancedDataAnalysis.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/interfaces/GeneralDataAnalysis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/DataAnalysisInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataAnalysisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/DataAnalysisService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interfaces/DataAnalysisInterface$DataAnalysisServiceInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/interfaces/DataAnalysisInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/service/DataAnalysisService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/audi.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/bmw.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ford.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/hyundi.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/merc.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/merged_data (1).csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/skoda.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/toyota.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/SceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/SceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataAnalysisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataAnalysisService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataVisualizationAnalysisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataVisualizationAnalysisService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/UI/MLPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UI/MLPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/UI/main_scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UI/main_scene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +35,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -39,7 +53,7 @@
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/sajaa45/OOP-Project",
-    "accountId": "e7b50d8e-5b4f-42e1-a66c-4eef9cb763b6"
+    "accountId": "a0141c42-7a4f-4a04-93db-5b6dd2aad31a"
   }
 }]]></component>
   <component name="ProjectColorInfo">{
@@ -50,28 +64,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;cleaned-branch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
-      </set>
-    </attachedChunks>
-  </component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -105,12 +111,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/repository/CarRepository.java</url>
-          <line>12</line>
+          <line>11</line>
           <properties class="repository.CarRepository">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataVisualizationAnalysisService.java</url>
+          <line>94</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

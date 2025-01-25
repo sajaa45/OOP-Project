@@ -6,6 +6,7 @@ controller\DataAnalysisController.class
 main\Main.class
 repository\CarRepository.class
 service\DataImporting\DatabaseProcessorService.class
+main\DashboardResultsController.class
 service\DataAnalysis\DataVisualizationAnalysisService.class
 main\MLSceneController.class
 controller\DataUploadController$1.class

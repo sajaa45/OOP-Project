@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane fx:controller="main.DashboardResultsController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #FFFFE0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <!-- Title Label -->
+        <Label layoutX="600.0" layoutY="14.0" prefHeight="64.0" prefWidth="454.0" text="Dashboard Results" textFill="#b74848">
+            <font>
+                <Font name="Arial Bold" size="30.0" />
+            </font>
+        </Label>
+
+        <!-- Image Row 1 -->
+        <ImageView fx:id="histogramEngineSizeImageView" fitHeight="200.0" fitWidth="250.0" layoutX="100.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="histogramMileageImageView" fitHeight="200.0" fitWidth="250.0" layoutX="360.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="histogramMpgImageView" fitHeight="200.0" fitWidth="250.0" layoutX="620.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="histogramPriceImageView" fitHeight="200.0" fitWidth="250.0" layoutX="880.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="histogramRoadTaxImageView" fitHeight="200.0" fitWidth="250.0" layoutX="1140.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+
+        <!-- Image Row 2 -->
+        <ImageView fx:id="histogramYearImageView" fitHeight="200.0" fitWidth="250.0" layoutX="100.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="pieChartFuelTypeImageView" fitHeight="200.0" fitWidth="250.0" layoutX="360.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="pieChartTransmissionImageView" fitHeight="200.0" fitWidth="250.0" layoutX="620.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="pieChartCarTypeImageView" fitHeight="200.0" fitWidth="250.0" layoutX="880.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="scatterPlotEngineSizeVsPriceImageView" fitHeight="200.0" fitWidth="250.0" layoutX="1140.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+
+        <!-- Image Row 3 -->
+        <ImageView fx:id="scatterPlotMpgVsPriceImageView" fitHeight="200.0" fitWidth="250.0" layoutX="360.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="scatterPlotYearVsPriceImageView" fitHeight="200.0" fitWidth="250.0" layoutX="620.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="scatterPlotMileageVsPriceImageView" fitHeight="200.0" fitWidth="250.0" layoutX="880.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" />
+        <!-- Button to go back to the main page -->
+        <Button fx:id="backToMainButton"  layoutX="700.0" layoutY="730.0" prefWidth="200.0" prefHeight="40.0" text="Go back to main page" onAction="#goBackToMainPage" />
+
+    </children>
+</AnchorPane>

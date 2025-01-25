@@ -39,7 +39,7 @@ public class Main extends Application {
         launch(args);
     }
 
-    void processData() {
+    static void processData() {
         // Initialize components for data processing
         DataUploadController controller = new DataUploadController();
         DataAnalysisService analysis = new DataAnalysisService();
@@ -71,9 +71,11 @@ public class Main extends Application {
         System.out.println("\n--- Numerical Analysis ---");
         analysis.analyzeNumericalData(cleanedCarList, new String[]{"year", "price", "mileage", "roadTax", "mpg", "engineSize"});
         System.out.println("\n--- Categorical Analysis ---");
+        String output = "C:\\Users\\LENOVO\\Desktop\\Junior\\project_oop_version2\\data\\Categorical_plots.png";
         analysis.analyzeCategoricalData(cleanedCarList, new String[]{"transmission", "fuelType", "typeCar"});
         System.out.println("\n--- Regression and Correlation Analysis ---");
-        visualizer.createScatterPlotMatrix(cleanedCarList, attributes);
+        String outputPath = "C:\\Users\\LENOVO\\Desktop\\Junior\\project_oop_version2\\data\\scatter_plot_with_regression.png";
+        visualizer.createScatterPlotsAndSave(cleanedCarList, attributes);
 
         // Convert cleaned data to 2D array
         Object[][] rawDataForPCA = convertCarListToDataArray(cleanedCarList);
