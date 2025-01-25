@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout">
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/DataVisualizationMLService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/DataVisualizationMLService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/EvaluationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/EvaluationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/MLModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/MLModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/MLModelTrainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/MLModelTrainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/ModelDeploymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/ModelDeploymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
-    </list>
+    <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
