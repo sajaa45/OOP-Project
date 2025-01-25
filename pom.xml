@@ -77,5 +77,11 @@
             <artifactId>weka-stable</artifactId>
             <version>3.8.6</version>
         </dependency>
+        <!-- SVM -->
+        <dependency>
+            <groupId>tw.edu.ntu.csie</groupId>
+            <artifactId>libsvm</artifactId>
+            <version>3.25</version>
+        </dependency>
     </dependencies>
 </project>

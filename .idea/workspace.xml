@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout">
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/DataPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/DataPreprocessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/DataVisualizationMLService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/DataVisualizationMLService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/EvaluationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/EvaluationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/MLModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/MLModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/MLModelTrainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/MLModelTrainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/OOP2-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/OOP2-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/ModelDeploymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/ModelDeploymentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +39,12 @@
     &quot;assignee&quot;: &quot;sajaa45&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/sajaa45/OOP-Project.git",
-    "accountId": "6c09115b-3675-4316-a8a8-9161a82e2871"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/sajaa45/OOP-Project&quot;,
+    &quot;accountId&quot;: &quot;972f39e0-81e7-4216-9f69-e08102a3181c&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -55,11 +55,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.EvaluationService.executor": "Run",
     "Application.MLModelTrainer.executor": "Run",
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "adem",
+    "git-widget-placeholder": "aya__sa",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
