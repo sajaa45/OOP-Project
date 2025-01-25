@@ -142,7 +142,6 @@ public class Main {
             // Save the untuned model to a file
             evaluationService.saveModel(randomForestModel, "RandomForest.model");
 
-            /*
             // Validate the model
             MLModelTrainer.ModelResult validationResult = evaluationService.validateModel(
                     (RandomForest) results.get(2).getModel(), validationFeatures_converted, validationTarget_converted
@@ -211,17 +210,6 @@ public class Main {
             // Display comparison results in a new JFrame
             DataVisualizationMLService visualizer2 = new DataVisualizationMLService();
             visualizer2.displayComparisonResults(validationResult, testResult, tunedValidationResult, tunedTestResult);
-            */
-            /*
-            // Load the trained model
-            MLModel mlModel = new MLModel();
-            mlModel.loadModel("randomForest_untuned.model");
-
-            // Start the deployment server
-            ModelDeploymentService server = new ModelDeploymentService(mlModel);
-            server.startServer();*/
-
-
         } catch (Exception e) {
             System.err.println("Error during model training: " + e.getMessage());
             e.printStackTrace();
