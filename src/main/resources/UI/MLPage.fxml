@@ -1,11 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.ImageView?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFE0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MLSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #FFFFE0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MLSceneController">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="83.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
+      <!-- Title Label -->
+      <Label layoutX="492.0" layoutY="48.0" text="The predicted price for your car based on our study:" textFill="#b12626">
+         <font>
+            <Font name="Bodoni MT" size="24.0" />
+         </font>
+      </Label>
+
+      <!-- Dynamic Label -->
+      <Label fx:id="myLabel" layoutX="692.0" layoutY="110.0" prefHeight="27.0" prefWidth="438.0" text="Label">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+
+      <!-- GridPane for Images -->
+      <GridPane layoutX="100.0" layoutY="150.0" hgap="20" vgap="20">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" percentWidth="16.6"/>
+            <ColumnConstraints halignment="CENTER" percentWidth="16.6"/>
+            <ColumnConstraints halignment="CENTER" percentWidth="16.6"/>
+            <ColumnConstraints halignment="CENTER" percentWidth="16.6"/>
+            <ColumnConstraints halignment="CENTER" percentWidth="16.6"/>
+            <ColumnConstraints halignment="CENTER" percentWidth="16.6"/>
+         </columnConstraints>
+
+         <rowConstraints>
+            <RowConstraints vgrow="ALWAYS"/>
+            <RowConstraints vgrow="ALWAYS"/>
+            <RowConstraints vgrow="ALWAYS"/>
+         </rowConstraints>
+
+         <!-- Row 1 Label -->
+         <Label text="Evaluation and Testing Results"  GridPane.rowIndex="0" GridPane.columnSpan="6"  >
+            <font>
+               <Font name="Bodoni MT" size="16.0" />
+            </font></Label>
+
+         <!-- Image Row 1 -->
+         <ImageView fx:id="histogramEngineSizeImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+         <ImageView fx:id="histogramMileageImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+         <ImageView fx:id="histogramMpgImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+         <ImageView fx:id="histogramPriceImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+         <ImageView fx:id="histogramRoadTaxImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="4"/>
+         <ImageView fx:id="histogramYearImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="5"/>
+
+         <!-- Row 2 Label -->
+         <Label text="Model Results"  GridPane.rowIndex="2" GridPane.columnSpan="6"  >
+            <font>
+               <Font name="Bodoni MT" size="16.0" />
+            </font></Label>
+
+         <!-- Image Row 2 -->
+         <ImageView fx:id="pieChartFuelTypeImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+         <ImageView fx:id="pieChartTransmissionImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+         <ImageView fx:id="pieChartCarTypeImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+         <ImageView fx:id="scatterPlotEngineSizeVsPriceImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="3"/>
+         <ImageView fx:id="scatterPlotMpgVsPriceImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="4"/>
+         <ImageView fx:id="scatterPlotYearVsPriceImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="5"/>
+
+         <!-- Row 3 Label -->
+         <Label text="Model Performance Comparison"  GridPane.rowIndex="4" GridPane.columnSpan="6" >
+            <font>
+               <Font name="Bodoni MT" size="16.0" />
+            </font></Label>
+         <!-- Image Row 3 -->
+         <ImageView fx:id="scatterPlotMileageVsPriceImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+      </GridPane>
+
+      <!-- Button to go back to the main page -->
+      <Button fx:id="backToMainButton" layoutX="700.0" layoutY="730.0" prefWidth="200.0" prefHeight="40.0" text="Go back to main page" onAction="#goBackToMainPage" />
    </children>
 </AnchorPane>

@@ -63,18 +63,24 @@ public class SceneController {
 
     @FXML
     public void goToNewPage() {
-        if (isFormValid()) {
+        //if (isFormValid()) {
             try {
                 // Load new FXML and transition to the new scene
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/MLPage.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) goToNewPageButton.getScene().getWindow();
+                // Access the controller
+                MLSceneController controller = loader.getController();
+
+                // Dynamically set the label text
+                controller.setLabelText("32.000");
+
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
             } catch (IOException e) {
-                e.printStackTrace();
+               //// e.printStackTrace();
             }
-        }
+
     }
 
     @FXML
@@ -87,7 +93,7 @@ public class SceneController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
         } catch (IOException e) {
-            e.printStackTrace(); // Handle loading error
+            //e.printStackTrace(); // Handle loading error
         }
     }
 
@@ -96,12 +102,12 @@ public class SceneController {
         try {
             Main.processData(); // Assuming Main has a static method `processData`
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             // Optionally, handle any errors here
         }
-    }
+    }}
 
-    private boolean isFormValid() {
+    /*private boolean isFormValid() {
         StringBuilder validationErrors = new StringBuilder();
 
         // Check for empty fields
@@ -142,4 +148,4 @@ public class SceneController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-}
+}*/
