@@ -6,11 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/MLSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/MLSceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/SceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/SceneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/UI/MLPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UI/MLPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataAnalysisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataAnalysisService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataVisualizationAnalysisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataVisualizationAnalysisService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/MachineLearning/DataPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/MachineLearning/DataPreprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/UI/main_scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UI/main_scene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,8 +114,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/main/Main.java</url>
-          <line>43</line>
-          <properties class="main.Main" method="processData">
+          <line>21</line>
+          <properties class="main.Main">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>

@@ -28,23 +28,19 @@
          <Label layoutX="53.0" layoutY="263.0" prefHeight="18.0" prefWidth="47.0" text="Model:" />
          <TextField fx:id="modelField" layoutX="167.0" layoutY="260.0" />
          <TextField fx:id="yearField" layoutX="167.0" layoutY="304.0" />
-         <TextField fx:id="priceField" layoutX="167.0" layoutY="350.0" />
          <Label layoutX="60.0" layoutY="308.0" text="Year:" />
-         <Label layoutX="59.0" layoutY="354.0" text="Price:" />
-         <Label layoutX="41.0" layoutY="395.0" text="Transmission:" />
-         <ChoiceBox fx:id="trans" layoutX="167.0" layoutY="391.0" prefWidth="150.0" />
+         <Label layoutX="41.0" layoutY="354.0" text="Transmission:" />
+         <ChoiceBox fx:id="trans" layoutX="167.0" layoutY="350.0" prefWidth="150.0" />
          <Label layoutX="435.0" layoutY="214.0" text="Mileage:" />
          <Label layoutX="431.0" layoutY="264.0" text="Fuel Type:" />
-         <Label layoutX="448.0" layoutY="308.0" text="Tax:" />
-         <Label layoutX="445.0" layoutY="354.0" text="Mpg:" />
-         <Label layoutX="427.0" layoutY="395.0" text="Engine Size:" />
+         <Label layoutX="445.0" layoutY="308.0" text="Mpg:" />
+         <Label layoutX="426.0" layoutY="354.0" text="Engine Size:" />
             <TextField fx:id="mileageField" layoutX="556.0" layoutY="219.0" />
-            <TextField fx:id="taxField" layoutX="556.0" layoutY="304.0" />
-            <TextField fx:id="mpgField" layoutX="555.0" layoutY="350.0" />
-            <TextField fx:id="engineSizeField" layoutX="555.0" layoutY="391.0" />
+            <TextField fx:id="mpgField" layoutX="555.0" layoutY="304.0" />
+            <TextField fx:id="engineSizeField" layoutX="555.0" layoutY="350.0" />
          <ChoiceBox fx:id="fuel" layoutX="555.0" layoutY="260.0" prefWidth="150.0" />
          <Button fx:id="goToNewPageButton" layoutX="336.0" layoutY="477.0" mnemonicParsing="false" onAction="#goToNewPage" text="Start prediction" />
-         <Button fx:id="goToDashboardButton" layoutX="529.0" layoutY="125.0" mnemonicParsing="false" text="See Results" onAction="#goToDashboard"/>
+         <Button fx:id="goToDashboardButton" layoutX="529.0" layoutY="125.0" mnemonicParsing="false" onAction="#goToDashboard" text="See Results" />
 
 
         </children>

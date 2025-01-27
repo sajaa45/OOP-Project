@@ -431,7 +431,7 @@ public class DataPreprocessor {
     }
 
     // Convert data to double array for PCA
-    public static double[][] convertToDoubleArray(Object[][] data) {
+    private static double[][] convertToDoubleArray(Object[][] data) {
         int rows = data.length;
         int cols = data[0].length;
         double[][] result = new double[rows][cols];

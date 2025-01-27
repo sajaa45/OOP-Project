@@ -123,7 +123,7 @@ public class DataAnalysisService implements AdvancedDataAnalysis {
             allCharts.add(histogram);
 
             // Save the histogram plot as an image
-            String fileName = "C:\\Users\\LENOVO\\Desktop\\Junior\\project_oop_version2\\data\\categorical_data\\histogram_" + attribute + ".png";
+            String fileName = "data/categorical_data/histogram_" + attribute + ".png";
             DataVisualizationAnalysisService.saveChartAsImage(histogram, fileName);
         }
     }

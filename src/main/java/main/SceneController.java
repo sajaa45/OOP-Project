@@ -1,5 +1,6 @@
 package main;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +9,13 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class SceneController {
 
@@ -16,11 +24,7 @@ public class SceneController {
     @FXML
     private TextField yearField; // TextField for "Year"
     @FXML
-    private TextField priceField; // TextField for "Price"
-    @FXML
     private TextField mileageField; // TextField for "Mileage"
-    @FXML
-    private TextField taxField; // TextField for "Tax"
     @FXML
     private TextField mpgField; // TextField for "Mpg"
     @FXML
@@ -54,17 +58,80 @@ public class SceneController {
         // Initialize TextFields with placeholders or empty strings
         modelField.setText("");
         yearField.setText("");
-        priceField.setText("");
         mileageField.setText("");
-        taxField.setText("");
         mpgField.setText("");
         engineSizeField.setText("");
     }
 
     @FXML
+    public void sendDataToBackend() {
+        // Collect data from input fields and choice boxes
+        // Use LinkedHashMap instead of HashMap to preserve insertion order
+        Map<String, Object> data = new LinkedHashMap<>();
+        data.put("mileage", parseInteger(mileageField.getText()));
+        data.put("year", parseInteger(yearField.getText()));
+        data.put("engineSize", parseDouble(engineSizeField.getText()));
+        data.put("mpg", parseDouble(mpgField.getText()));
+        data.put("transmission", trans.getValue());
+        data.put("carType", myChoiceBox.getValue());
+        data.put("model", modelField.getText());
+        data.put("fuelType", fuel.getValue());
+
+        try {
+            // Convert data map to JSON string
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(data);
+
+            System.out.println("Sending JSON: " + json);
+            // Create an HTTP client
+            HttpClient client = HttpClient.newHttpClient();
+
+            // Create a POST HTTP request with JSON payload
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:4567/predict")) // Replace with your backend URL
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(json))
+                    .build();
+
+            // Send the request and handle the response
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            // Print the response (optional)
+            System.out.println("Response code: " + response.statusCode());
+            System.out.println("Response body: " + response.body());
+
+            // Optionally, show a confirmation dialog
+            if (response.statusCode() == 200) {
+                showAlert("Success", "Data sent successfully!");
+            } else {
+                showAlert("Error", "Failed to send data. Response code: " + response.statusCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "An error occurred while sending data: " + e.getMessage());
+        }
+    }
+
+    private Integer parseInteger(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return null; // Return null if parsing fails
+        }
+    }
+
+    private Double parseDouble(String value) {
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            return null; // Return null if parsing fails
+        }
+    }
+    @FXML
     public void goToNewPage() {
         //if (isFormValid()) {
             try {
+                sendDataToBackend();
                 // Load new FXML and transition to the new scene
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/MLPage.fxml"));
                 Parent root = loader.load();
@@ -90,6 +157,7 @@ public class SceneController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/Dashboard.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) goToDashboardButton.getScene().getWindow();
+
             Scene scene = new Scene(root);
             stage.setScene(scene);
         } catch (IOException e) {
@@ -100,12 +168,12 @@ public class SceneController {
     @FXML
     private void onAddDataClicked() {
         try {
-            Main.processData(); // Assuming Main has a static method `processData`
+            //Main.processData(); // Assuming Main has a static method `processData`
         } catch (Exception e) {
             //e.printStackTrace();
             // Optionally, handle any errors here
         }
-    }}
+    }
 
     /*private boolean isFormValid() {
         StringBuilder validationErrors = new StringBuilder();
@@ -140,7 +208,7 @@ public class SceneController {
 
     private boolean isNumeric(String str) {
         return str.matches("\\d+(\\.\\d+)?"); // Matches integers and decimals
-    }
+    }*/
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -148,4 +216,4 @@ public class SceneController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-}*/
+}

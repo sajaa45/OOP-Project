@@ -98,7 +98,7 @@ public class DataVisualizationAnalysisService {
                 JFreeChart chart = createScatterPlotWithRegression(cars, xAttribute, "price");
 
                 // Save the chart as an image
-                String fileName = "C:\\Users\\LENOVO\\Desktop\\Junior\\project_oop_version2\\data\\numerical_data\\scatter_plot_" + xAttribute + "_vs_price.png";
+                String fileName = "data/numerical_data/scatter_plot_" + xAttribute + "_vs_price.png";
                 saveChartAsImage(chart, fileName);
 
             } catch (Exception e) {  // Catching general exception for broader error handling
