@@ -1,10 +1,14 @@
 package service.MachineLearning;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.apache.commons.math3.linear.RealMatrix;
 import utils.DataCleaningUtils;
 import org.apache.commons.math3.linear.*;
-
-
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.logging.*;
 
@@ -263,7 +267,7 @@ public class DataPreprocessor {
         }
     }
 
-
+    // Method to use stored means and stdDevs
     public static Object[][] applyNormalization(Object[][] data) {
         if (data == null || data.length == 0) {
             throw new IllegalArgumentException("Input data cannot be null or empty.");
@@ -409,7 +413,7 @@ public class DataPreprocessor {
     }
 
     // Apply PCA to reduce dimensionality of data
-    private Object[][] applyPCA(Object[][] data, int nComponents) {
+    public Object[][] applyPCA(Object[][] data, int nComponents) {
         // Convert the data to a double[][] for PCA
         double[][] numericData = convertToDoubleArray(data);
 

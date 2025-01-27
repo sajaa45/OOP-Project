@@ -7,6 +7,7 @@ import service.DataAnalysis.DataAnalysisService;
 import service.DataAnalysis.DataVisualizationAnalysisService;
 import service.MachineLearning.*;
 import utils.DataCleaningUtils;
+import service.MachineLearning.DataPreprocessor;
 import service.MachineLearning.MLModelTrainer;
 import service.MachineLearning.EvaluationService;
 import weka.classifiers.trees.RandomForest;
@@ -33,6 +34,9 @@ public class Main {
         Object[][] testFeatures = null;
         Object[][] testTarget = null;
 
+        // Declare preprocessor outside the try block
+        DataPreprocessor preprocessor = null;
+
         // Loop for uploading data until successful
         while (true) {
             data = controller.getData();
@@ -46,7 +50,6 @@ public class Main {
                 System.err.println("Interrupted during sleep: " + e.getMessage());
             }
         }
-
         // Process raw data
         carRepository.processRawData(data);
         List<Car> carList = carRepository.getCars();
@@ -66,10 +69,9 @@ public class Main {
             System.err.println("Error: Raw data for PCA is null or empty.");
             return;
         }
-
         System.out.println("Preparing data for preprocessing...");
         try {
-            DataPreprocessor preprocessor = new DataPreprocessor(rawDataForPCA);
+            preprocessor = new DataPreprocessor(rawDataForPCA); // Initialize preprocessor
             double varianceThreshold = 0.95;
 
             // Preprocess and retrieve split data
@@ -100,7 +102,6 @@ public class Main {
             System.err.println("Error during data preprocessing: " + e.getMessage());
             e.printStackTrace();
         }
-
         // Train Machine Learning models
         try {
             System.out.println("\n--- Training Machine Learning Models ---");
@@ -112,16 +113,15 @@ public class Main {
             double[] validationTarget_converted = convertToDoubleColumn(validationTarget);
             double[][] testFeatures_converted = convertToDoubleArray(testFeatures);
             double[] testTarget_converted = convertToDoubleColumn(testTarget);
-            /*
-            System.out.println("First three values of trainTarget_converted data:");
-            for (int i = 0; i < 3 && i < trainTarget_converted.length; i++) {
-                System.out.println(Arrays.toString(new double[]{trainTarget_converted[i]}));
-            }
-            System.out.println("First three rows of trainFeatures_converted data:");
-            for (int i = 0; i < 3 && i < trainFeatures_converted.length; i++) {
-                System.out.println(Arrays.toString(trainFeatures_converted[i]));
-            }*/
 
+            System.out.println("First three values of trainTarget_converted data:");
+                   for (int i = 0; i < 3 && i < trainTarget_converted.length; i++) {
+                       System.out.println(Arrays.toString(new double[]{trainTarget_converted[i]}));
+                   }
+                   System.out.println("First three rows of trainFeatures_converted data:");
+                   for (int i = 0; i < 3 && i < trainFeatures_converted.length; i++) {
+                       System.out.println(Arrays.toString(trainFeatures_converted[i]));
+             }
             // Train models
             MLModelTrainer modelTrainer = new MLModelTrainer();
             List<MLModelTrainer.ModelResult> results = modelTrainer.trainAndEvaluateModels(trainFeatures_converted, trainTarget_converted);
@@ -144,7 +144,7 @@ public class Main {
 
             // Validate the model
             MLModelTrainer.ModelResult validationResult = evaluationService.validateModel(
-                    (RandomForest) results.get(2).getModel(), validationFeatures_converted, validationTarget_converted
+                    randomForestModel, validationFeatures_converted, validationTarget_converted
             );
             System.out.println("Validation Results:");
             System.out.println("MSE: " + validationResult.getMse());
@@ -156,7 +156,7 @@ public class Main {
 
             // Test the model
             MLModelTrainer.ModelResult testResult = evaluationService.testModel(
-                    (RandomForest) results.get(2).getModel(), testFeatures_converted, testTarget_converted
+                    randomForestModel, testFeatures_converted, testTarget_converted
             );
             System.out.println("Test Results:");
             System.out.println("MSE: " + testResult.getMse());
@@ -210,6 +210,15 @@ public class Main {
             // Display comparison results in a new JFrame
             DataVisualizationMLService visualizer2 = new DataVisualizationMLService();
             visualizer2.displayComparisonResults(validationResult, testResult, tunedValidationResult, tunedTestResult);
+
+            // Load the trained model
+            MLModel mlModel = new MLModel();
+            mlModel.loadModel("RandomForest.model");
+
+            // Start the deployment server
+            ModelDeploymentService server = new ModelDeploymentService(mlModel);
+            server.startServer();
+
         } catch (Exception e) {
             System.err.println("Error during model training: " + e.getMessage());
             e.printStackTrace();
