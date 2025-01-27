@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/MLSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/MLSceneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/SceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/SceneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/DataCleaningUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/DataCleaningUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/UI/MLPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UI/MLPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/utils/DataCleaningUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utils/DataCleaningUtils.class" afterDir="false" />
-    </list>
+    <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

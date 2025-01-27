@@ -122,7 +122,7 @@ public class SceneController {
     }
     @FXML
     public void goToNewPage() {
-        //if (isFormValid()) {
+        if (isFormValid()) {
             try {
                 // Load new FXML and transition to the new scene
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/MLPage.fxml"));
@@ -138,7 +138,7 @@ public class SceneController {
                 stage.setScene(scene);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }}
 
     }
 
