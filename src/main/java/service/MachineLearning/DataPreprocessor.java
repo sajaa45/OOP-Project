@@ -1,10 +1,14 @@
 package service.MachineLearning;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.apache.commons.math3.linear.RealMatrix;
 import utils.DataCleaningUtils;
 import org.apache.commons.math3.linear.*;
-
-
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.logging.*;
 
@@ -60,6 +64,30 @@ public class DataPreprocessor {
         return oneHotMap;
     }
 
+    //for debugging
+    // Helper method to print the first n rows of a 2D array
+    private void printFirstNRows(Object[][] data, int n, String stepName) {
+        if (data == null || data.length == 0) {
+            System.out.println(stepName + ": Data is null or empty.");
+            return;
+        }
+
+        System.out.println("First " + n + " rows of " + stepName + ":");
+        for (int i = 0; i < Math.min(n, data.length); i++) {
+            System.out.println(Arrays.toString(data[i]));
+        }
+        System.out.println();
+    }
+
+    // helper method to extract target variable
+    public Object[] extractTargetVariable(Object[][] data) {
+        Object[] targetVariable = new Object[data.length];
+        for (int i = 0; i < data.length; i++) {
+            targetVariable[i] = data[i][4]; // Extract the target variable (price) at index 4
+        }
+        return targetVariable;
+    }
+
 
     public Object[][] preprocessData(Object[][] rawData, int nComponents) {
         // Step 1: Clean the data
@@ -67,7 +95,11 @@ public class DataPreprocessor {
 
 
         // Step 2: Encode categorical variables (model, fuelType, transmission, car_type)
-        Object[][] encodedData = encodeCategoricalVariables(cleanedData);
+        int carTypeIndex = 6; // Column index for "car_type"
+        int modelIndex = 7;   // Column index for "model"
+        int fuelTypeIndex = 8; // Column index for "fuelType"
+        int transmissionIndex = 5; // Column index for "transmission"
+        Object[][] encodedData = encodeCategoricalVariables(cleanedData, carTypeIndex, modelIndex, fuelTypeIndex, transmissionIndex);
 
 
         // Step 3: Normalize numerical data (price, mileage, engine size, etc.)
@@ -85,21 +117,31 @@ public class DataPreprocessor {
     public void preprocessAndDisplayData(Object[][] data, double varianceThreshold) {
         // Step 1: Clean the data
         this.cleanedData = DataCleaningUtils.cleanData(data, MISSING_VALUE_PLACEHOLDER);
+        printFirstNRows(this.cleanedData, 3, "cleanedData");
 
         // Step 2: Encode categorical variables
-        this.encodedData = encodeCategoricalVariables(this.cleanedData);
+        int carTypeIndex = 6; // Column index for "car_type"
+        int modelIndex = 7;   // Column index for "model"
+        int fuelTypeIndex = 8; // Column index for "fuelType"
+        int transmissionIndex = 5; // Column index for "transmission"
+        this.encodedData = encodeCategoricalVariables(this.cleanedData, carTypeIndex, modelIndex, fuelTypeIndex, transmissionIndex);
+        printFirstNRows(this.encodedData, 3, "encodedData");
 
         // Step 3: Normalize numerical data
         this.normalizedData = applyNormalization(this.encodedData);
+        printFirstNRows(this.normalizedData, 3, "normalizedData");
 
-        // Step 4: Apply PCA
+        // Step 4: Extract the target variable (price)
+        Object[] targetVariable = extractTargetVariable(this.normalizedData);
+
+        // Step 5: Apply PCA
         double[][] numericData = convertToDoubleArray(this.normalizedData);
         int nComponents = determineNumberOfComponents(numericData, varianceThreshold);
         this.reducedData = applyPCA(this.normalizedData, nComponents);
+        printFirstNRows(this.reducedData, 3, "reducedData");
 
-
-        // Split the reduced data into training, validation, and test sets
-        Map<String, Object[][]> splits = splitData(this.reducedData);
+        // Step 6: Split the reduced data and target variable into training, validation, and test sets
+        Map<String, Object[][]> splits = splitData(this.reducedData, targetVariable);
     }
 
 
@@ -113,40 +155,70 @@ public class DataPreprocessor {
     }
 
     // Method to split the reduced data into training, validation, and test sets
-    public Map<String, Object[][]> splitData(Object[][] data) {
-        if (data == null || data.length == 0) {
+    public Map<String, Object[][]> splitData(Object[][] reducedData, Object[] targetVariable) {
+        if (reducedData == null || reducedData.length == 0 || targetVariable == null || targetVariable.length == 0) {
             throw new IllegalArgumentException("Input data cannot be null or empty.");
         }
 
-        int totalRows = data.length;
+        int totalRows = reducedData.length;
         int trainSize = (int) (totalRows * TRAIN_RATIO);
         int validationSize = (int) (totalRows * VALIDATION_RATIO);
         int testSize = totalRows - trainSize - validationSize;
 
         // Shuffle the data for randomization
-        List<Object[]> dataList = Arrays.asList(data);
-        Collections.shuffle(dataList, new Random());
+        List<Integer> indices = new ArrayList<>();
+        for (int i = 0; i < totalRows; i++) {
+            indices.add(i);
+        }
+        Collections.shuffle(indices, new Random());
 
-        // Convert the list back to array after shuffling
-        Object[][] shuffledData = dataList.toArray(new Object[0][0]);
+        // Split the reduced data (features)
+        Object[][] trainFeatures = new Object[trainSize][];
+        Object[][] validationFeatures = new Object[validationSize][];
+        Object[][] testFeatures = new Object[testSize][];
 
-        // Split the data
-        Object[][] trainData = Arrays.copyOfRange(shuffledData, 0, trainSize);
-        Object[][] validationData = Arrays.copyOfRange(shuffledData, trainSize, trainSize + validationSize);
-        Object[][] testData = Arrays.copyOfRange(shuffledData, trainSize + validationSize, totalRows);
+        // Split the target variable
+        Object[] trainTarget = new Object[trainSize];
+        Object[] validationTarget = new Object[validationSize];
+        Object[] testTarget = new Object[testSize];
+
+        for (int i = 0; i < trainSize; i++) {
+            trainFeatures[i] = reducedData[indices.get(i)];
+            trainTarget[i] = targetVariable[indices.get(i)];
+        }
+        for (int i = 0; i < validationSize; i++) {
+            validationFeatures[i] = reducedData[indices.get(trainSize + i)];
+            validationTarget[i] = targetVariable[indices.get(trainSize + i)];
+        }
+        for (int i = 0; i < testSize; i++) {
+            testFeatures[i] = reducedData[indices.get(trainSize + validationSize + i)];
+            testTarget[i] = targetVariable[indices.get(trainSize + validationSize + i)];
+        }
 
         // Store the splits in a map for easy access
         Map<String, Object[][]> splitDataMap = new HashMap<>();
-        splitDataMap.put("train", trainData);
-        splitDataMap.put("validation", validationData);
-        splitDataMap.put("test", testData);
+        splitDataMap.put("train_features", trainFeatures);
+        splitDataMap.put("train_target", convertTo2DArray(trainTarget));  // Proper conversion to 2D array
+        splitDataMap.put("validation_features", validationFeatures);
+        splitDataMap.put("validation_target", convertTo2DArray(validationTarget));  // Proper conversion to 2D array
+        splitDataMap.put("test_features", testFeatures);
+        splitDataMap.put("test_target", convertTo2DArray(testTarget));  // Proper conversion to 2D array
 
         return splitDataMap;
     }
 
+    // Helper method to convert 1D array to 2D array
+    private Object[][] convertTo2DArray(Object[] array) {
+        Object[][] result = new Object[array.length][1];
+        for (int i = 0; i < array.length; i++) {
+            result[i][0] = array[i];
+        }
+        return result;
+    }
+
 
     // Method to encode categorical variables (car_type, model, transmission, fuelType)
-    private Object[][] encodeCategoricalVariables(Object[][] data) {
+    private Object[][] encodeCategoricalVariables(Object[][] data, int carTypeIndex, int modelIndex, int fuelTypeIndex, int transmissionIndex) {
         if (data == null || data.length == 0) {
             throw new IllegalArgumentException("Input data cannot be null or empty.");
         }
@@ -160,15 +232,18 @@ public class DataPreprocessor {
                 if (value instanceof String) {
                     String stringValue = (String) value;
 
-
-                    if (carTypeMap.containsKey(stringValue)) {
-                        encodedRow.addAll(Arrays.asList(carTypeMap.get(stringValue))); // One-hot encode "car_type"
-                    } else if (modelMap.containsKey(stringValue)) {
-                        encodedRow.addAll(Arrays.asList(modelMap.get(stringValue))); // One-hot encode "model"
-                    } else if (fuelTypeMap.containsKey(stringValue)) {
-                        encodedRow.addAll(Arrays.asList(fuelTypeMap.get(stringValue))); // One-hot encode "fuelType"
-                    } else if (transmissionMap.containsKey(stringValue)) {
-                        encodedRow.addAll(Arrays.asList(transmissionMap.get(stringValue)));
+                    // Determine which map to use based on the column index
+                    if (j == carTypeIndex) {
+                        encodedRow.addAll(encodeValue(stringValue, carTypeMap));
+                    } else if (j == modelIndex) {
+                        encodedRow.addAll(encodeValue(stringValue, modelMap));
+                    } else if (j == fuelTypeIndex) {
+                        encodedRow.addAll(encodeValue(stringValue, fuelTypeMap));
+                    } else if (j == transmissionIndex) {
+                        encodedRow.addAll(encodeValue(stringValue, transmissionMap));
+                    } else {
+                        // Preserve non-categorical strings (e.g., other string columns)
+                        encodedRow.add(value);
                     }
                 } else {
                     encodedRow.add(value); // Preserve non-categorical values
@@ -180,8 +255,19 @@ public class DataPreprocessor {
 
         return encodedDataList.toArray(new Object[0][0]);
     }
+    // Helper method to encode a categorical value using the appropriate map
+    private List<Object> encodeValue(String value, Map<String, Integer[]> map) {
+        if (map.containsKey(value)) {
+            return Arrays.asList(map.get(value)); // Use existing encoding
+        } else {
+            // Handle unknown categorical values by mapping them to a default encoding (all zeros)
+            Integer[] defaultEncoding = new Integer[map.size()];
+            Arrays.fill(defaultEncoding, 0);
+            return Arrays.asList(defaultEncoding);
+        }
+    }
 
-
+    // Method to use stored means and stdDevs
     public static Object[][] applyNormalization(Object[][] data) {
         if (data == null || data.length == 0) {
             throw new IllegalArgumentException("Input data cannot be null or empty.");
@@ -192,38 +278,51 @@ public class DataPreprocessor {
         int numCols = data[0].length;
         Object[][] normalizedData = new Object[numRows][numCols];
 
+        // Indices of numerical columns excluding price (mileage=0, year=1, engineSize=2, mpg=3)
+        int[] numericalColumns = {0, 1, 2, 3};
+        // Normalize only numerical columns
+        for (int col : numericalColumns) {
+            double mean = calculateMean(data, col);
+            double stdDev = calculateStdDev(data, col, mean);
 
-        for (int col = 0; col < numCols; col++) {
-            if (isNumericColumn(data, col)) {
-                double mean = calculateMean(data, col);
-                double stdDev = calculateStdDev(data, col, mean);
-                for (int row = 0; row < numRows; row++) {
-                    Object value = data[row][col];
-                    if (value instanceof Number) {
-                        double numericValue = ((Number) value).doubleValue();
-                        normalizedData[row][col] = (stdDev == 0) ? 0 : (numericValue - mean) / stdDev; // Avoid division by zero
-                    } else {
-                        normalizedData[row][col] = value; // Preserve non-numeric values
+            LOGGER.info("Normalizing column " + col + " with mean=" + mean + " and stdDev=" + stdDev);
+            for (int row = 0; row < numRows; row++) {
+                Object value = data[row][col];
+                double numericValue;
+
+                // Handle cases where the value is a string or a number
+                if (value instanceof Number) {
+                    numericValue = ((Number) value).doubleValue();
+                } else if (value instanceof String) {
+                    try {
+                        numericValue = Double.parseDouble((String) value);
+                    } catch (NumberFormatException e) {
+                        LOGGER.warning("Non-numeric value found in column " + col + ": " + value);
+                        numericValue = 0; // Default to 0 if parsing fails
                     }
+                } else {
+                    LOGGER.warning("Non-numeric value found in column " + col + ": " + value);
+                    numericValue = 0; // Default to 0 for other non-numeric types
                 }
-            } else {
+
+                normalizedData[row][col] = (stdDev == 0) ? 0 : (numericValue - mean) / stdDev; // Avoid division by zero
+            }
+        }
+
+        // Copy non-numerical columns (categorical and target) as is
+        for (int col = 0; col < numCols; col++) {
+            if (!contains(numericalColumns, col)) { // Skip numerical columns
                 for (int row = 0; row < numRows; row++) {
-                    normalizedData[row][col] = data[row][col]; // Copy non-numeric columns as is
+                    normalizedData[row][col] = data[row][col]; // Copy as is
                 }
             }
         }
         return normalizedData;
     }
-
-    // Helper method to check if a column is numeric
-    private static boolean isNumericColumn(Object[][] data, int col) {
-        // Ensure that the column index is valid
-        if (col >= data[0].length) {
-            LOGGER.severe("Column index out of bounds: " + col);
-            return false;
-        }
-        for (Object[] row : data) {
-            if (row[col] instanceof Number) {
+    // Helper method to check if an array contains a value
+    private static boolean contains(int[] array, int value) {
+        for (int i : array) {
+            if (i == value) {
                 return true;
             }
         }
@@ -235,10 +334,25 @@ public class DataPreprocessor {
         double sum = 0;
         int count = 0;
         for (Object[] row : data) {
-            if (row[col] instanceof Number) {
-                sum += ((Number) row[col]).doubleValue();
-                count++;
+            Object value = row[col];
+            double numericValue;
+
+            if (value instanceof Number) {
+                numericValue = ((Number) value).doubleValue();
+            } else if (value instanceof String) {
+                try {
+                    numericValue = Double.parseDouble((String) value);
+                } catch (NumberFormatException e) {
+                    LOGGER.warning("Non-numeric value found in column " + col + ": " + value);
+                    continue; // Skip this value
+                }
+            } else {
+                LOGGER.warning("Non-numeric value found in column " + col + ": " + value);
+                continue; // Skip this value
             }
+
+            sum += numericValue;
+            count++;
         }
         return count == 0 ? 0 : sum / count;
     }
@@ -247,13 +361,26 @@ public class DataPreprocessor {
         double sumSquaredDiff = 0;
         int count = 0;
         for (Object[] row : data) {
-            if (row[col] instanceof Number) {
-                double value = ((Number) row[col]).doubleValue();
-                sumSquaredDiff += Math.pow(value - mean, 2);
-                count++;
+            Object value = row[col];
+            double numericValue;
+            if (value instanceof Number) {
+                numericValue = ((Number) value).doubleValue();
+            } else if (value instanceof String) {
+                try {
+                    numericValue = Double.parseDouble((String) value);
+                } catch (NumberFormatException e) {
+                    LOGGER.warning("Non-numeric value found in column " + col + ": " + value);
+                    continue; // Skip this value
+                }
+            } else {
+                LOGGER.warning("Non-numeric value found in column " + col + ": " + value);
+                continue; // Skip this value
             }
+
+            sumSquaredDiff += Math.pow(numericValue - mean, 2);
+            count++;
         }
-        return count == 0 ? 1 : Math.sqrt(sumSquaredDiff / count); // Avoid division by zero
+        return count == 0 ? 0 : Math.sqrt(sumSquaredDiff / count); // Avoid division by zero
     }
 
     private int determineNumberOfComponents(double[][] data, double varianceThreshold) {
@@ -286,7 +413,7 @@ public class DataPreprocessor {
     }
 
     // Apply PCA to reduce dimensionality of data
-    private Object[][] applyPCA(Object[][] data, int nComponents) {
+    public Object[][] applyPCA(Object[][] data, int nComponents) {
         // Convert the data to a double[][] for PCA
         double[][] numericData = convertToDoubleArray(data);
 
@@ -304,19 +431,23 @@ public class DataPreprocessor {
     }
 
     // Convert data to double array for PCA
-    private static double[][] convertToDoubleArray(Object[][] data) {
+    public static double[][] convertToDoubleArray(Object[][] data) {
         int rows = data.length;
         int cols = data[0].length;
         double[][] result = new double[rows][cols];
 
 
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (data[i][j] instanceof Number) {
-                    result[i][j] = ((Number) data[i][j]).doubleValue();
-                } else {
-                    result[i][j] = 0.0; // Handle non-numeric entries gracefully
+            for (int j = 0, k = 0; j < data[i].length; j++) {
+                if (j == 4) {
+                    continue; // Skip the target variable column (index 4)
                 }
+                if (data[i][j] instanceof Number) {
+                    result[i][k] = ((Number) data[i][j]).doubleValue();
+                } else {
+                    result[i][k] = 0.0; // Handle non-numeric entries gracefully
+                }
+                k++;
             }
         }
         return result;

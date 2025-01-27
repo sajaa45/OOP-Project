@@ -1,4 +1,5 @@
 main\SceneController.class
+service\MachineLearning\ModelDeploymentService$ErrorResponse.class
 service\DataImporting\FileProcessorService.class
 interfaces\DataVisualization.class
 interfaces\DataVisualizationML.class
@@ -15,16 +16,19 @@ service\DataImporting\DataIngestionService.class
 service\DataAnalysis\DataAnalysisService.class
 service\MachineLearning\EvaluationService.class
 interfaces\AdvancedDataAnalysis.class
+service\MachineLearning\ModelDeploymentService$PredictionRequest.class
 utils\DataCleaningUtils.class
 service\MachineLearning\MLModel.class
 service\MachineLearning\MLModelTrainer.class
 model\Vehicle.class
+service\MachineLearning\ModelDeploymentService$PredictionResponse.class
 model\Car.class
 controller\DataUploadController.class
 service\MachineLearning\DataVisualizationMLService.class
 controller\DataUploadController$2.class
 interfaces\GeneralDataAnalysis.class
 service\MachineLearning\DataPreprocessor.class
+service\MachineLearning\MLModelTrainer$ModelResult.class
 service\MachineLearning\ModelDeploymentService.class
 controller\VisualizationController.class
 interfaces\DataUploadInterface.class
