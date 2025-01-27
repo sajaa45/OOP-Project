@@ -38,40 +38,49 @@
          </rowConstraints>
 
          <!-- Row 1 Label -->
-         <Label text="Evaluation and Testing Results"  GridPane.rowIndex="0" GridPane.columnSpan="6"  >
+         <Label text="Evaluation and Testing Results" GridPane.rowIndex="0" GridPane.columnSpan="6">
             <font>
                <Font name="Bodoni MT" size="16.0" />
-            </font></Label>
+            </font>
+         </Label>
 
          <!-- Image Row 1 -->
-         <ImageView fx:id="histogramEngineSizeImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-         <ImageView fx:id="histogramMileageImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-         <ImageView fx:id="histogramMpgImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-         <ImageView fx:id="histogramPriceImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
-         <ImageView fx:id="histogramRoadTaxImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="4"/>
-         <ImageView fx:id="histogramYearImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="5"/>
+         <ImageView fx:id="msemodel" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+         <ImageView fx:id="maemodel" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+         <ImageView fx:id="rmsemodel" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+         <ImageView fx:id="mapemodel" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+         <ImageView fx:id="medmodel" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="4"/>
+         <ImageView fx:id="rmodel" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="1" GridPane.columnIndex="5"/>
 
          <!-- Row 2 Label -->
-         <Label text="Model Results"  GridPane.rowIndex="2" GridPane.columnSpan="6"  >
+         <Label text="Model Results" GridPane.rowIndex="2" GridPane.columnSpan="6">
             <font>
                <Font name="Bodoni MT" size="16.0" />
-            </font></Label>
+            </font>
+         </Label>
 
          <!-- Image Row 2 -->
-         <ImageView fx:id="pieChartFuelTypeImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-         <ImageView fx:id="pieChartTransmissionImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-         <ImageView fx:id="pieChartCarTypeImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
-         <ImageView fx:id="scatterPlotEngineSizeVsPriceImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="3"/>
-         <ImageView fx:id="scatterPlotMpgVsPriceImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="4"/>
-         <ImageView fx:id="scatterPlotYearVsPriceImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="5"/>
+         <ImageView fx:id="msevt" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+         <ImageView fx:id="maevt" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+         <ImageView fx:id="rmsevt" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+         <ImageView fx:id="mapevt" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="3"/>
+         <ImageView fx:id="medvt" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="4"/>
+         <ImageView fx:id="rvt" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="3" GridPane.columnIndex="5"/>
 
          <!-- Row 3 Label -->
-         <Label text="Model Performance Comparison"  GridPane.rowIndex="4" GridPane.columnSpan="6" >
+         <Label text="Model Performance Comparison" GridPane.rowIndex="4" GridPane.columnSpan="6">
             <font>
                <Font name="Bodoni MT" size="16.0" />
-            </font></Label>
+            </font>
+         </Label>
+
          <!-- Image Row 3 -->
-         <ImageView fx:id="scatterPlotMileageVsPriceImageView" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+         <ImageView fx:id="msec" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+         <ImageView fx:id="maec" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+         <ImageView fx:id="rmsec" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+         <ImageView fx:id="mapec" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="5" GridPane.columnIndex="3"/>
+         <ImageView fx:id="medc" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="5" GridPane.columnIndex="4"/>
+         <ImageView fx:id="rc" fitHeight="130.0" fitWidth="180.0" GridPane.rowIndex="5" GridPane.columnIndex="5"/>
       </GridPane>
 
       <!-- Button to go back to the main page -->

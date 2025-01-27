@@ -100,15 +100,8 @@ public class SceneController {
             System.out.println("Response code: " + response.statusCode());
             System.out.println("Response body: " + response.body());
 
-            // Optionally, show a confirmation dialog
-            if (response.statusCode() == 200) {
-                showAlert("Success", "Data sent successfully!");
-            } else {
-                showAlert("Error", "Failed to send data. Response code: " + response.statusCode());
-            }
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "An error occurred while sending data: " + e.getMessage());
         }
     }
 
@@ -131,7 +124,6 @@ public class SceneController {
     public void goToNewPage() {
         //if (isFormValid()) {
             try {
-                sendDataToBackend();
                 // Load new FXML and transition to the new scene
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/MLPage.fxml"));
                 Parent root = loader.load();
@@ -140,12 +132,12 @@ public class SceneController {
                 MLSceneController controller = loader.getController();
 
                 // Dynamically set the label text
-                controller.setLabelText("32.000");
+                controller.setLabelText("27.000");
 
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
             } catch (IOException e) {
-               //// e.printStackTrace();
+                e.printStackTrace();
             }
 
     }
@@ -161,29 +153,27 @@ public class SceneController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
         } catch (IOException e) {
-            //e.printStackTrace(); // Handle loading error
+            e.printStackTrace(); // Handle loading error
         }
     }
 
     @FXML
     private void onAddDataClicked() {
         try {
-            //Main.processData(); // Assuming Main has a static method `processData`
+            Main.processData(); // Assuming Main has a static method `processData`
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             // Optionally, handle any errors here
         }
     }
 
-    /*private boolean isFormValid() {
+    private boolean isFormValid() {
         StringBuilder validationErrors = new StringBuilder();
 
         // Check for empty fields
         if (modelField.getText().trim().isEmpty()) validationErrors.append("Model is required.\n");
         if (yearField.getText().trim().isEmpty()) validationErrors.append("Year is required.\n");
-        if (priceField.getText().trim().isEmpty()) validationErrors.append("Price is required.\n");
         if (mileageField.getText().trim().isEmpty()) validationErrors.append("Mileage is required.\n");
-        if (taxField.getText().trim().isEmpty()) validationErrors.append("Tax is required.\n");
         if (mpgField.getText().trim().isEmpty()) validationErrors.append("MPG is required.\n");
         if (engineSizeField.getText().trim().isEmpty()) validationErrors.append("Engine Size is required.\n");
         if (myChoiceBox.getValue() == null) validationErrors.append("Car Type is required.\n");
@@ -192,9 +182,7 @@ public class SceneController {
 
         // Validate numeric inputs and append error messages for invalid fields
         if (!isNumeric(yearField.getText())) validationErrors.append("Year must be a valid number.\n");
-        if (!isNumeric(priceField.getText())) validationErrors.append("Price must be a valid number.\n");
         if (!isNumeric(mileageField.getText())) validationErrors.append("Mileage must be a valid number.\n");
-        if (!isNumeric(taxField.getText())) validationErrors.append("Tax must be a valid number.\n");
         if (!isNumeric(mpgField.getText())) validationErrors.append("MPG must be a valid number.\n");
         if (!isNumeric(engineSizeField.getText())) validationErrors.append("Engine Size must be a valid number.\n");
 
@@ -208,8 +196,7 @@ public class SceneController {
 
     private boolean isNumeric(String str) {
         return str.matches("\\d+(\\.\\d+)?"); // Matches integers and decimals
-    }*/
-
+    }
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);

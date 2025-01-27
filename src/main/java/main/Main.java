@@ -5,20 +5,43 @@ import controller.DataUploadController;
 import repository.CarRepository;
 import service.DataAnalysis.DataAnalysisService;
 import service.DataAnalysis.DataVisualizationAnalysisService;
-import service.MachineLearning.*;
 import utils.DataCleaningUtils;
-import service.MachineLearning.DataPreprocessor;
-import service.MachineLearning.MLModelTrainer;
-import service.MachineLearning.EvaluationService;
+import service.MachineLearning.*;
 import weka.classifiers.trees.RandomForest;
 
 import java.util.List;
 import java.util.Arrays;
 import java.util.Map;
 
-public class Main {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        // Load the FXML file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/main_scene.fxml"));
+
+        // Set the scene
+        Scene scene = new Scene(loader.load());
+
+        // Configure the stage
+        stage.setTitle("Car Analysis Application");
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
     public static void main(String[] args) {
+        // Launch the JavaFX application
+        launch(args);
+    }
+
+    static void processData() {
         // Initialize components
         DataUploadController controller = new DataUploadController();
         DataAnalysisService analysis = new DataAnalysisService();
@@ -59,8 +82,10 @@ public class Main {
         System.out.println("\n--- Numerical Analysis ---");
         analysis.analyzeNumericalData(cleanedCarList, new String[]{"year", "price", "mileage", "roadTax", "mpg", "engineSize"});
         System.out.println("\n--- Categorical Analysis ---");
+        String output = "C:\\Users\\LENOVO\\Desktop\\Junior\\project_oop_version2\\data\\Categorical_plots.png";
         analysis.analyzeCategoricalData(cleanedCarList, new String[]{"transmission", "fuelType", "typeCar"});
         System.out.println("\n--- Regression and Correlation Analysis ---");
+        String outputPath = "C:\\Users\\LENOVO\\Desktop\\Junior\\project_oop_version2\\data\\scatter_plot_with_regression.png";
         visualizer.createScatterPlotsAndSave(cleanedCarList, attributes);
 
         // Convert cleaned data to 2D array
@@ -69,6 +94,7 @@ public class Main {
             System.err.println("Error: Raw data for PCA is null or empty.");
             return;
         }
+        /*
         System.out.println("Preparing data for preprocessing...");
         try {
             preprocessor = new DataPreprocessor(rawDataForPCA); // Initialize preprocessor
@@ -222,7 +248,7 @@ public class Main {
         } catch (Exception e) {
             System.err.println("Error during model training: " + e.getMessage());
             e.printStackTrace();
-        }
+        }*/
     }
 
     // Helper method to convert List<Car> to a 2D array (Object[][]) format
@@ -282,5 +308,5 @@ public class Main {
             }
         }
         return result;
-    }
-}
+    }}
+

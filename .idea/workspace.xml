@@ -6,11 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/numerical_data/scatter_plot_engineSize_vs_price.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/numerical_data/scatter_plot_engineSize_vs_price.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/numerical_data/scatter_plot_mileage_vs_price.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/numerical_data/scatter_plot_mileage_vs_price.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/numerical_data/scatter_plot_mpg_vs_price.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/numerical_data/scatter_plot_mpg_vs_price.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/numerical_data/scatter_plot_year_vs_price.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/numerical_data/scatter_plot_year_vs_price.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataAnalysisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/DataAnalysis/DataAnalysisService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/MLSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/MLSceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/SceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/SceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/DataCleaningUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/DataCleaningUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/UI/MLPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UI/MLPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utils/DataCleaningUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utils/DataCleaningUtils.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +69,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\LENOVO\Desktop\Junior\project_oop_version2\src\main\resources\data" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -111,7 +118,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/main/Main.java</url>
-          <line>21</line>
+          <line>44</line>
           <properties class="main.Main">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

@@ -15,22 +15,44 @@ import java.io.IOException;
 public class MLSceneController {
 
     @FXML
-    private ImageView histogramEngineSizeImageView;
-    @FXML private ImageView histogramMileageImageView;
-    @FXML private ImageView histogramMpgImageView;
+    private ImageView msemodel;
+    @FXML
+    private ImageView maemodel;
+    @FXML
+    private ImageView rmsemodel;
+    @FXML
+    private ImageView mapemodel;
+    @FXML
+    private ImageView medmodel;
+    @FXML
+    private ImageView rmodel;
 
-    @FXML private ImageView histogramPriceImageView;
-    @FXML private ImageView histogramRoadTaxImageView;
-    @FXML private ImageView histogramYearImageView;
+    @FXML
+    private ImageView msevt;
+    @FXML
+    private ImageView maevt;
+    @FXML
+    private ImageView rmsevt;
+    @FXML
+    private ImageView mapevt;
+    @FXML
+    private ImageView medvt;
+    @FXML
+    private ImageView rvt;
 
-    @FXML private ImageView pieChartFuelTypeImageView;
-    @FXML private ImageView pieChartTransmissionImageView;
-    @FXML private ImageView pieChartCarTypeImageView;
+    @FXML
+    private ImageView msec;
+    @FXML
+    private ImageView maec;
+    @FXML
+    private ImageView rmsec;
+    @FXML
+    private ImageView mapec;
+    @FXML
+    private ImageView medc;
+    @FXML
+    private ImageView rc;
 
-    @FXML private ImageView scatterPlotEngineSizeVsPriceImageView;
-    @FXML private ImageView scatterPlotMileageVsPriceImageView;
-    @FXML private ImageView scatterPlotMpgVsPriceImageView;
-    @FXML private ImageView scatterPlotYearVsPriceImageView;
     @FXML
     private Button backToMainButton;
     @FXML
@@ -42,23 +64,27 @@ public class MLSceneController {
     }
     @FXML
     private void initialize() {
-        histogramEngineSizeImageView.setImage(new Image("https://www.w3schools.com/w3images/fjords.jpg"));
+        msemodel.setImage(new Image("data/ML/MSE model.png"));
+        maemodel.setImage(new Image("data/ML/MAE Model.png"));
+        rmsemodel.setImage(new Image("data/ML/RMSE Model.png"));
+        mapemodel.setImage(new Image("data/ML/Mape Model.png"));
+        medmodel.setImage(new Image("data/ML/Med model.png"));
+        rmodel.setImage(new Image("data/ML/R model.png"));
 
-        histogramMileageImageView.setImage(new Image("https://www.w3schools.com/w3images/fjords.jpg"));
-        histogramMpgImageView.setImage(new Image("https://www.w3schools.com/w3images/fjords.jpg"));
+        msevt.setImage(new Image("data/ML/mse vt.png"));
+        maevt.setImage(new Image("data/ML/mae vt.png"));
+        rmsevt.setImage(new Image("data/ML/rmse vt.png"));
+        mapevt.setImage(new Image("data/ML/mape vt.png"));
+        medvt.setImage(new Image("data/ML/med vt.png"));
+        rvt.setImage(new Image("data/ML/r vt.png"));
 
-        histogramPriceImageView.setImage(new Image("https://www.w3schools.com/w3images/fjords.jpg"));
-        histogramRoadTaxImageView.setImage(new Image("file:///C:/Users/LENOVO/Desktop/Junior/project_oop_version2/data/categorical_data/histogram_roadTax.png"));
-        histogramYearImageView.setImage(new Image("file:///C:/Users/LENOVO/Desktop/Junior/project_oop_version2/data/categorical_data/histogram_year.png"));
+        msec.setImage(new Image("data/ML/mse c.png"));
+        maec.setImage(new Image("data/ML/mae c.png"));
+        rmsec.setImage(new Image("data/ML/rmse c.png"));
+        mapec.setImage(new Image("data/ML/mape c.png"));
+        medc.setImage(new Image("data/ML/med c.png"));
+        rc.setImage(new Image("data/ML/r c.png"));
 
-        pieChartFuelTypeImageView.setImage(new Image("https://www.w3schools.com/w3images/fjords.jpg"));
-        pieChartTransmissionImageView.setImage(new Image("file:///C:/Users/LENOVO/Desktop/Junior/project_oop_version2/data/categorical_data/pie_chart_transmission.png"));
-        pieChartCarTypeImageView.setImage(new Image("file:///C:/Users/LENOVO/Desktop/Junior/project_oop_version2/data/categorical_data/pie_chart_typeCar.png"));
-
-        scatterPlotEngineSizeVsPriceImageView.setImage(new Image("file:///C:/Users/LENOVO/Desktop/Junior/project_oop_version2/data/numerical_data/scatter_plot_engineSize_vs_price.png"));
-        scatterPlotMileageVsPriceImageView.setImage(new Image("https://www.w3schools.com/w3images/fjords.jpg"));
-        scatterPlotMpgVsPriceImageView.setImage(new Image("file:///C:/Users/LENOVO/Desktop/Junior/project_oop_version2/data/numerical_data/scatter_plot_mpg_vs_price.png"));
-        scatterPlotYearVsPriceImageView.setImage(new Image("file:///C:/Users/LENOVO/Desktop/Junior/project_oop_version2/data/numerical_data/scatter_plot_year_vs_price.png"));
     }
     // Handle going back to the main page
     @FXML
