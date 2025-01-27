@@ -144,7 +144,7 @@ public class DataAnalysisService implements AdvancedDataAnalysis {
             allCharts.add(pieChart);
 
             // Save the pie chart as an image
-            String fileName = "C:\\Users\\LENOVO\\Desktop\\Junior\\project_oop_version2\\data\\categorical_data\\pie_chart_" + attribute + ".png";
+            String fileName = "data/categorical_data/pie_chart_" + attribute + ".png";
             DataVisualizationAnalysisService.saveChartAsImage(pieChart, fileName);
         }
     }
