@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout">
-      <change beforePath="$PROJECT_DIR$/RandomForest.model" beforeDir="false" />
-    </list>
+    <list default="true" id="314b08ab-89b7-44b5-b995-e9249b2bd873" name="Changes" comment="fixing grid layout" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
