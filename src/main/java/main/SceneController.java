@@ -46,12 +46,12 @@ public class SceneController {
     @FXML
     public void initialize() {
         // Initialize ChoiceBoxes with example data
-        myChoiceBox.getItems().addAll("Sedan", "SUV", "Hatchback", "Convertible");
+        myChoiceBox.getItems().addAll("Audi", "Merc", "BMW", "Toyota");
         trans.getItems().addAll("Manual", "Automatic");
         fuel.getItems().addAll("Petrol", "Diesel", "Electric", "Hybrid");
 
         // Optionally, set default values for ChoiceBoxes
-        myChoiceBox.setValue("Sedan");
+        myChoiceBox.setValue("Audi");
         trans.setValue("Manual");
         fuel.setValue("Petrol");
 
